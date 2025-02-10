@@ -82,4 +82,5 @@ class KaryawanController extends Controller
             'waktu_absen' => now()
         ]);
     }
+    #Test
 }
