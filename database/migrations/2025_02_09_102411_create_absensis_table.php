@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('karyawan_id')->constrained('karyawans')->onDelete('cascade');
-            $table->timestamp('waktu_absen')->useCurrent();
+            $table->timestamp('jam_masuk')->nullable();
+            $table->timestamp('jam_keluar')->nullable();
+            $table->integer('jam_kerja')->nullable(); // dalam menit
             $table->timestamps();
         });
     }

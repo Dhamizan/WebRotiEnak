@@ -10,14 +10,15 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('position');
+            $table->string('password');
             $table->string('fingerprint_id')->nullable();
             # Bisa ditambahkan gambar karyawan, tapi sekarang gw belum pake buat percobaan
+            $table->integer('role');
             $table->timestamps();
         });
     }
 
     public function down() {
-        Schema::dropIfExists('karyawan');
+        Schema::dropIfExists('karyawans');
     }
 };

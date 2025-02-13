@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Absensi extends Model
 {
     use HasFactory;
-    protected $fillable = ['karyawan_id', 'waktu_absen'];
+    protected $fillable = ['karyawan_id', 'jam_masuk', 'jam_keluar', 'jam_kerja'];
 
-    public function karyawan() {
+    public function karyawan()
+    {
         return $this->belongsTo(Karyawan::class);
     }
 }
