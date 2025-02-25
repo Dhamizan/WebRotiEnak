@@ -24,7 +24,6 @@ class KaryawanController extends Controller
             return response()->json(['message' => 'Email atau password salah'], 401);
         }
 
-        // Cek apakah user adalah admin (role = 1)
         if ($karyawan->role !== 1) {
             return response()->json(['message' => 'Anda bukan admin'], 403);
         }
@@ -35,6 +34,11 @@ class KaryawanController extends Controller
             'message' => 'Login berhasil',
             'token' => $token
         ]);
+    }
+
+    public function logout (Request $request){
+        $request->user()->tokens()->delete();
+        return response()->json(['message' => 'Logout berhasil']);
     }
 
     public function __construct(){
@@ -159,6 +163,7 @@ class KaryawanController extends Controller
         }
     
         // Jika sudah ada jam masuk dan keluar, tolak absensi ketiga
+        // Tes
         return response()->json(['message' => 'Anda sudah absen 2 kali hari ini'], 409);
     }    
 }
