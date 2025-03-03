@@ -80,7 +80,6 @@ class KaryawanController extends Controller
                 'email' => $karyawan->email,
                 'password' => $karyawan->password,
                 'role' => $karyawan->role,
-
             ]
         ], 201);
     }
@@ -163,7 +162,6 @@ class KaryawanController extends Controller
         }
     
         // Jika sudah ada jam masuk dan keluar, tolak absensi ketiga
-        // Tes
         return response()->json(['message' => 'Anda sudah absen 2 kali hari ini'], 409);
     }    
 }

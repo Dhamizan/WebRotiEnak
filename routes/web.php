@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+=======
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/dashboard', function () {
+    return view('index');
+});
+
+Route::get('/employee', function () {
+    return view('employee');
+});
+
+Route::get('/absense', function () {
+    return view('absense');
+});
+
+Route::get('/salary', function () {
+    return view('salary');
+});
+
+Route::get('/leave', function () {
+    return view('leave');
+});
+>>>>>>> c3220ff3e8236824249ef186a29dbf33b3bd6849
