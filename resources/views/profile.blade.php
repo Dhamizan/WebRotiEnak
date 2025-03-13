@@ -33,11 +33,10 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="flex h-screen bg-gray-100">
-    
     <!-- Sidebar -->
     <div class="w-64 bg-white shadow-lg flex flex-col absolute top-16 left-0 bottom-0 z-0">
         <ul class="mt-10 space-y-8">
-        <li>
+            <li>
                 <a href="/dashboard" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('dashboard') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M10 2L2 8v10h6v-6h4v6h6V8l-8-6z"/>
@@ -87,7 +86,7 @@
                 </a>
         </li>
     </div>
-    
+
     <!-- Content Area -->
     <div class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
     <!-- Logo di Kiri -->
@@ -119,83 +118,71 @@
 
         <span class="text-lg text-white">Hi, Robby</span>
     </div>
-</div>
+    </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
-        <h3 class="text-lg">Hello, Admin</h3>
-        <h1 class="text-3xl font-bold">Welcome to Absense!</h1>
-        
-        <div class="space-y-4 w-full mt-12 overflow-x-auto">
-        <div class="relative">
-        <input type="text" placeholder="Search..." 
-            class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.293 3.707l3.853 3.854a1 1 0 11-1.414 1.414l-3.854-3.853A6 6 0 012 8z" clip-rule="evenodd"/>
-        </svg>
+    <div class="p-6 mt-20 ml-64">
+    <h3 class="text-lg">Hello, Admin</h3>
+    <h1 class="text-3xl font-bold">Welcome to Your Profile!</h1>
+
+    <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+    <!-- Profile Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
+        <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/80" alt="Profile" class="w-16 h-16 rounded-full">
+            <div>
+                <h2 class="text-xl font-semibold">Alexa Rawles</h2>
+                <p class="text-gray-500 text-sm">alexarawles@gmail.com</p>
+            </div>
+        </div>
+        <button class="bg-yellow-500 text-white px-5 py-2 rounded-lg hover:bg-yellow-600 mt-4 sm:mt-0">
+            Edit
+        </button>
     </div>
-            <table class="text-left w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                            <div class="flex items-center space-x-4">
-                                <span>Outlet</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Check In</span>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Check Out</span>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Working Hours</span>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                </tbody>
-            </table>
+
+    <!-- Profile Details -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Username</label>
+            <input type="text" value="Admin Roti Enak" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Email</label>
+            <input type="text" value="rotienak.id@gmail.com" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Phone</label>
+            <input type="text" value="08123456789" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Address</label>
+            <input type="text" value="Jl. Krangganan 7, Cibubur, Bekasi" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Role</label>
+            <input type="text" value="Admin" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Gender</label>
+            <input type="text" value="Male" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
         </div>
     </div>
-            </div>
 
+    <!-- Back Button -->
+    <div class="mt-6 flex justify-end">
+        <button class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
+            Back
+        </button>
+    </div>
+</div>
+
+    </div>
+</div>
     </body>
 </html>

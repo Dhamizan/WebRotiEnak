@@ -25,3 +25,7 @@ Route::get('/salary', function () {
 Route::get('/leave', function () {
     return view('leave');
 });
+
+Route::get('/profile', function () {
+    return view('profile');
+});
