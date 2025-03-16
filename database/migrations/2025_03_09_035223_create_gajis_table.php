@@ -6,14 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('absensis', function (Blueprint $table) {
+        Schema::create('gajis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pengguna')->constrained('penggunas')->onDelete('cascade');
-            $table->time('jam_masuk')->nullable();
-            $table->time('jam_keluar')->nullable();
-            $table->time('jam_kerja')->nullable(); // dalam menit
+            $table->foreignId('id_absensi')->constrained('absensis')->onDelete('cascade');
+            $table->decimal('gaji')->nullable();
+            $table->decimal('tunjangan')->nullable();
+            $table->decimal('potongan')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensis');
+        Schema::dropIfExists('gajis');
     }
 };

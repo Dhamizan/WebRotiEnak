@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Absensi extends Model
+class Absensi extends Authenticatable
 {
     use HasFactory;
-    protected $fillable = ['karyawan_id', 'jam_masuk', 'jam_keluar', 'jam_kerja'];
+    protected $fillable = ['id_pengguna', 'jam_masuk', 'jam_keluar', 'jam_kerja'];
 
-    public function karyawan()
+    public function pengguna()
     {
-        return $this->belongsTo(Karyawan::class);
+        return $this->belongsTo(Pengguna::class);
     }
 }

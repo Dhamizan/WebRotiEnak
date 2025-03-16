@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'penggunas',
     ],
 
     /*
@@ -28,7 +28,7 @@ return [
     | here which uses session storage and the Eloquent user provider.
     |
     | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
+    | penggunas are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
     | Supported: "session"
@@ -38,7 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'penggunas',
+        ],
+
+        'api' => [
+            'driver' => 'sanctum', // atau 'sanctum' jika pakai Laravel Sanctum
+            'provider' => 'penggunas',
         ],
     ],
 
@@ -48,7 +53,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
+    | penggunas are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
     | If you have multiple user tables or models you may configure multiple
@@ -60,14 +65,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'penggunas' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Pengguna::class,
         ],
 
-        // 'users' => [
+        // 'penggunas' => [
         //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'table' => 'penggunas',
         // ],
     ],
 
@@ -91,8 +96,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'penggunas' => [
+            'provider' => 'penggunas',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\PenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +42,7 @@ Route::get('/salary', function () {
 Route::get('/leave', function () {
     return view('leave');
 });
+
+//Route::get('/login', function () {
+//    return response()->json(['message' => 'Silakan login terlebih dahulu'], 401);
+//})->name('login');

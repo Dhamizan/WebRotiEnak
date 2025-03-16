@@ -9,12 +9,15 @@ class AdminSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('karyawans')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin123'),
-            'role' => 1,
-            'fingerprint_id' => 1,
+        DB::table('penggunas')->insert([
+            'nama' => 'Admin',
+            'email' => 'dhamizanputra@gmail.com',
+            'notelp' => '08123456789',
+            'alamat'=> 'Griya Soka Bogor',
+            'kata_sandi' => bcrypt('admin123'),
+            'peran' => 1,
+            'jenis_kelamin' => 'Pria',
+            'id_sidik_jari' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
