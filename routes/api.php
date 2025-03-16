@@ -12,3 +12,11 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/login', [KaryawanController::class, 'login']);
+Route::post('/hitung-gaji/{id_karyawan}', [GajiController::class, 'hitungGaji']);
+
+
+Route::get('/cuti', [CutiController::class, 'index']);
+Route::post('/cuti', [CutiController::class, 'store']);
+Route::get('/cuti/{id}', [CutiController::class, 'show']);
+Route::put('/cuti/{id}', [CutiController::class, 'update']);
+Route::delete('/cuti/{id}', [CutiController::class, 'destroy']);
