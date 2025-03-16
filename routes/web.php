@@ -20,27 +20,31 @@ Route::get('/', function () {
 });
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('index');
+    return view('admin/index');
 });
 
 Route::get('/employee', function () {
-    return view('employee');
+    return view('admin/employee');
 });
 
 Route::get('/absense', function () {
-    return view('absense');
+    return view('admin/absense');
 });
 
 Route::get('/salary', function () {
-    return view('salary');
+    return view('admin/salary');
 });
 
 Route::get('/leave', function () {
-    return view('leave');
+    return view('admin/leave');
+});
+
+Route::get('/profile', function () {
+    return view('admin/profile');
 });
 
 //Route::get('/login', function () {
