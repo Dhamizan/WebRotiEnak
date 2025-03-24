@@ -138,83 +138,56 @@
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.293 3.707l3.853 3.854a1 1 0 11-1.414 1.414l-3.854-3.853A6 6 0 012 8z" clip-rule="evenodd"/>
         </svg>
     </div>
-            <table class="text-left w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                            <div class="flex items-center space-x-4">
-                                <span>Outlet</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Role</span>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Working Hours</span>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Salary</span>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Robby Susanto</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Leader Area</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Rp. 350.000</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Robby Susanto</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Leader Area</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Rp. 350.000</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Robby Susanto</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Leader Area</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Rp. 350.000</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Robby Susanto</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Leader Area</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Rp. 350.000</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                    <div class="flex items-center space-x-2">No</div></th>
+                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortOutlet()">
+                        <div class="flex items-center space-x-2">
+                            <span>Outlet</span>
+                            <svg id="sortIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                            </svg>
+                        </div>
+                    </th>
+                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                    <div class="flex items-center space-x-2">Role</div></th>
+                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                    <div class="flex items-center space-x-2">Working Hours</div></th>
+                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                    <div class="flex items-center space-x-2">Salary</div></th>
+                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                    <div class="flex items-center space-x-2"></div></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr class="border-b">
+                    <td class="py-4 px-6 bg-white">1</td>
+                    <td class="py-4 px-6 bg-white">Robby Susanto</td>
+                    <td class="py-4 px-6 bg-white">Leader Area</td>
+                    <td class="py-4 px-6 bg-white">07:56:30</td>
+                    <td class="py-4 px-6 bg-white">Rp. 350.000</td>
+                    <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
+                </tr>
+                <tr class="border-b">
+                    <td class="py-4 px-6 bg-white">2</td>
+                    <td class="py-4 px-6 bg-white">Admin Roti Enak</td>
+                    <td class="py-4 px-6 bg-white">Staff</td>
+                    <td class="py-4 px-6 bg-white">08:00:00</td>
+                    <td class="py-4 px-6 bg-white">Rp. 300.000</td>
+                    <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
+                </tr>
+                <tr class="border-b">
+                    <td class="py-4 px-6 bg-white">3</td>
+                    <td class="py-4 px-6 bg-white">Outlet XYZ</td>
+                    <td class="py-4 px-6 bg-white">Cashier</td>
+                    <td class="py-4 px-6 bg-white">07:45:30</td>
+                    <td class="py-4 px-6 bg-white">Rp. 320.000</td>
+                    <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
+                </tr>
+            </tbody>
+        </table>
         </div>
     </div>
             </div>
@@ -230,6 +203,26 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
+
+                let ascending = true;
+
+                function sortOutlet() {
+                    let table = document.getElementById("tableBody");
+                    let rows = Array.from(table.rows);
+
+                    rows.sort((a, b) => {
+                        let outletA = a.cells[1].textContent.trim().toLowerCase();
+                        let outletB = b.cells[1].textContent.trim().toLowerCase();
+                        
+                        return ascending ? outletA.localeCompare(outletB) : outletB.localeCompare(outletA);
+                    });
+
+                    ascending = !ascending;
+                    rows.forEach(row => table.appendChild(row));
+
+                    let sortIcon = document.getElementById("sortIcon");
+                    sortIcon.classList.toggle("rotate-180");
+                }
             </script>
     </body>
 </html>

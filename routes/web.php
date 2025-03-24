@@ -37,3 +37,11 @@ Route::get('/dashboarduser', function () {
 Route::get('/absenseuser', function () {
     return view('absenseuser');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});

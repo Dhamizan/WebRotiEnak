@@ -148,7 +148,7 @@
             </div>
 
             <!-- Modal (Popup) -->
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden:">
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 class="text-xl font-bold text-center">Add Employee</h2>
             <p class="text-sm text-gray-500 text-center mb-4">Fill in the required details to add an employee</p>
@@ -199,98 +199,87 @@
         </div>
     </div>
         </div>
+        <table id="dataTable" class="min-w-full leading-normal">
+    <thead>
+        <tr>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">
+                No
+            </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(1)">
+                <div class="flex items-center space-x-4">
+                    <span>Outlet</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
 
-            <table class="text-left w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                            <div class="flex items-center space-x-4">
-                                <span>Outlet</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Leader Area</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Phone</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Address</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Outlet1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Jl. Outlet 1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-</svg>
-</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Outlet1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Jl. Outlet 1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-</svg>
-</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Outlet1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Jl. Outlet 1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-</svg>
-</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Outlet1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Jl. Outlet 1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-</svg>
-</td>
-                    </tr>
-                </tbody>
-            </table>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(2)">
+                <div class="flex items-center space-x-4">
+                    <span>Leader Area</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
+
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(3)">
+                <div class="flex items-center space-x-4">
+                    <span>Phone</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
+
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(4)">
+                <div class="flex items-center space-x-4">
+                    <span>Address</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(4)">
+                <div class="flex items-center space-x-4">
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="py-4 px-6 bg-white">1</td>
+            <td class="py-4 px-6 bg-white">Outlet C</td>
+            <td class="py-4 px-6 bg-white">John Doe</td>
+            <td class="py-4 px-6 bg-white">123456</td>
+            <td class="py-4 px-6 bg-white">Jl. ABC</td>
+            <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
+        </tr>
+        <tr>
+            <td class="py-4 px-6 bg-white">2</td>
+            <td class="py-4 px-6 bg-white">Outlet A</td>
+            <td class="py-4 px-6 bg-white">Jane Smith</td>
+            <td class="py-4 px-6 bg-white">654321</td>
+            <td class="py-4 px-6 bg-white">Jl. XYZ</td>
+            <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
+        </tr>
+        <tr>
+            <td class="py-4 px-6 bg-white">3</td>
+            <td class="py-4 px-6 bg-white">Outlet B</td>
+            <td class="py-4 px-6 bg-white">Alice Johnson</td>
+            <td class="py-4 px-6 bg-white">789012</td>
+            <td class="py-4 px-6 bg-white">Jl. DEF</td>
+            <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
+        </tr>
+    </tbody>
+</table>
         </div>
     </div>
             </div>
 
-            <script>
+    <script>
         // Ambil elemen
         const modal = document.getElementById("modal");
         const openModalBtn = document.getElementById("openModalBtn");
@@ -323,6 +312,30 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
+        
+                function sortTable(columnIndex) {
+    let table = document.getElementById("dataTable");
+    let tbody = table.getElementsByTagName("tbody")[0];
+    let rows = Array.from(tbody.getElementsByTagName("tr"));
+    
+    let ascending = table.dataset.sortOrder === "asc" ? false : true;
+    
+    rows.sort((a, b) => {
+        let cellA = a.getElementsByTagName("td")[columnIndex].textContent.trim().toLowerCase();
+        let cellB = b.getElementsByTagName("td")[columnIndex].textContent.trim().toLowerCase();
+        
+        if (!isNaN(cellA) && !isNaN(cellB)) {
+            return ascending ? cellA - cellB : cellB - cellA;
+        }
+
+        return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    });
+
+    tbody.innerHTML = "";
+    rows.forEach(row => tbody.appendChild(row));
+
+    table.dataset.sortOrder = ascending ? "asc" : "desc";
+}
     </script>
     </body>
 </html>

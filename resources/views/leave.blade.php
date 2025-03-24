@@ -138,92 +138,72 @@
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.293 3.707l3.853 3.854a1 1 0 11-1.414 1.414l-3.854-3.853A6 6 0 012 8z" clip-rule="evenodd"/>
         </svg>
     </div>
-            <table class="text-left w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                            <div class="flex items-center space-x-4">
-                                <span>Outlet</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Email</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Phone</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Role</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin Roti Enak</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">rotienak.id@gmail.com</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin Roti Enak</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">rotienak.id@gmail.com</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin Roti Enak</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">rotienak.id@gmail.com</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin Roti Enak</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">rotienak.id@gmail.com</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">622322662</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Admin</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
-                        </svg>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+            <tr>
+                <th class="py-3 px-6 bg-white font-bold uppercase text-sm border-b">
+                <div class="flex items-center space-x-2">
+                    No
+                </div>
+                </th>
+                <th class="py-3 px-6 border-b bg-white font-bold uppercase text-sm cursor-pointer" onclick="sortTable(1)">
+                    <div class="flex items-center space-x-2">
+                        <span>Outlet</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                    </div>
+                </th>
+                <th class="py-3 px-6 border-b bg-white font-bold uppercase text-sm cursor-pointer" onclick="sortTable(2)">
+                    <div class="flex items-center space-x-2">
+                        <span>Email</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                    </div>
+                </th>
+                <th class="py-3 px-6 border-b bg-white font-bold uppercase text-sm cursor-pointer" onclick="sortTable(3)">
+                    <div class="flex items-center space-x-2">
+                        <span>Phone</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                    </div>
+                </th>
+                <th class="py-3 px-6 border-b bg-white font-bold uppercase text-sm cursor-pointer" onclick="sortTable(4)">
+                    <div class="flex items-center space-x-2">
+                        <span>Role</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr class="border-b">
+                <td class="py-3 px-6">1</td>
+                <td class="py-3 px-6">Admin Roti Enak</td>
+                <td class="py-3 px-6">rotienak.id@gmail.com</td>
+                <td class="py-3 px-6">622322662</td>
+                <td class="py-3 px-6">ADMIN</td>
+            </tr>
+            <tr class="border-b">
+                <td class="py-3 px-6">2</td>
+                <td class="py-3 px-6">Outlet C</td>
+                <td class="py-3 px-6">outletc@gmail.com</td>
+                <td class="py-3 px-6">612345678</td>
+                <td class="py-3 px-6">USER</td>
+            </tr>
+            <tr class="border-b">
+                <td class="py-3 px-6">3</td>
+                <td class="py-3 px-6">Outlet B</td>
+                <td class="py-3 px-6">outletb@gmail.com</td>
+                <td class="py-3 px-6">601234567</td>
+                <td class="py-3 px-6">ADMIN</td>
+            </tr>
+        </tbody>
+    </table>
         </div>
     </div>
             </div>
@@ -239,6 +219,34 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
+
+                let sortDirections = [true, true, true, true]; // Ascending first
+
+                function sortTable(colIndex) {
+                    let table = document.getElementById("tableBody");
+                    let rows = Array.from(table.rows);
+
+                    let direction = sortDirections[colIndex - 1] ? 1 : -1;
+                    sortDirections[colIndex - 1] = !sortDirections[colIndex - 1];
+
+                    rows.sort((a, b) => {
+                        let aData = a.cells[colIndex].innerText.toLowerCase();
+                        let bData = b.cells[colIndex].innerText.toLowerCase();
+                        return aData > bData ? direction : aData < bData ? -direction : 0;
+                    });
+
+                    table.innerHTML = "";
+                    rows.forEach(row => table.appendChild(row));
+
+                    updateIcons(colIndex);
+                }
+
+                function updateIcons(colIndex) {
+                    for (let i = 1; i <= 4; i++) {
+                        document.getElementById(`icon${i}`).textContent = "↕";
+                    }
+                    document.getElementById(`icon${colIndex}`).textContent = sortDirections[colIndex - 1] ? "↓" : "↑";
+                }
             </script>
     </body>
 </html>

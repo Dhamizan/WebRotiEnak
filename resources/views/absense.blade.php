@@ -141,65 +141,55 @@
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.293 3.707l3.853 3.854a1 1 0 11-1.414 1.414l-3.854-3.853A6 6 0 012 8z" clip-rule="evenodd"/>
         </svg>
     </div>
-            <table class="text-left w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                            <div class="flex items-center space-x-4">
-                                <span>Outlet</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Check In</span>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Check Out</span>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Working Hours</span>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">Lian Smith</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                </tbody>
-            </table>
+    <table class="min-w-full leading-normal">
+    <thead>
+        <tr>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">
+                No
+            </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortOutlet()">
+                <div class="flex items-center space-x-4">
+                    <span>Outlet</span>
+                    <svg id="sortIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">Check In</div></th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                <div class="flex items-center space-x-4">Check Out</div></th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">Check OutWorking Hours</div></th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        <tr>
+            <td class="py-4 px-6 bg-white">1</td>
+            <td class="py-4 px-6 bg-white">Lian Smith</td>
+            <td class="py-4 px-6 bg-white">08:00</td>
+            <td class="py-4 px-6 bg-white">16:00</td>
+            <td class="py-4 px-6 bg-white">07:56:30</td>
+        </tr>
+        <tr>
+            <td class="py-4 px-6 bg-white">2</td>
+            <td class="py-4 px-6 bg-white">Admin Roti Enak</td>
+            <td class="py-4 px-6 bg-white">08:00</td>
+            <td class="py-4 px-6 bg-white">16:00</td>
+            <td class="py-4 px-6 bg-white">07:56:30</td>
+        </tr>
+        <tr>
+            <td class="py-4 px-6 bg-white">3</td>
+            <td class="py-4 px-6 bg-white">Outlet XYZ</td>
+            <td class="py-4 px-6 bg-white">08:00</td>
+            <td class="py-4 px-6 bg-white">16:00</td>
+            <td class="py-4 px-6 bg-white">07:56:30</td>
+        </tr>
+    </tbody>
+</table>
+
         </div>
     </div>
             </div>
@@ -215,6 +205,40 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
+
+                let sortDirections = [true]; // True = ASC, False = DESC
+
+                function sortOutlet() {
+                    let table = document.getElementById("tableBody");
+                    let rows = Array.from(table.rows);
+
+                    let direction = sortDirections[0] ? 1 : -1;
+                    sortDirections[0] = !sortDirections[0];
+
+                    rows.sort((a, b) => {
+                        let aData = a.cells[1].innerText.toLowerCase();
+                        let bData = b.cells[1].innerText.toLowerCase();
+                        return aData > bData ? direction : aData < bData ? -direction : 0;
+                    });
+
+                    // Pastikan "No" tetap urut dari 1 sampai n
+                    rows.forEach((row, index) => {
+                        row.cells[0].innerText = index + 1;
+                        table.appendChild(row);
+                    });
+
+                    updateSortIcon();
+                }
+
+                function updateSortIcon() {
+                    let icon = document.getElementById("sortIcon");
+                    if (sortDirections[0]) {
+                        icon.style.transform = "rotate(0deg)"; // ASC
+                    } else {
+                        icon.style.transform = "rotate(180deg)"; // DESC
+                    }
+                }
+
             </script>
     </body>
 </html>
