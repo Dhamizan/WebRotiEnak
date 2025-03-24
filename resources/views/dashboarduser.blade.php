@@ -33,13 +33,13 @@
         @endif
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <div class="flex h-screen bg-gray-100">
+    < class="flex h-screen bg-gray-100">
     <!-- Sidebar -->
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out md:translate-x-0 md:relative z-50">
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out md:translate-x-0 md:relative z-50"></aside>
     <div class="w-64 bg-white shadow-lg flex flex-col absolute top-16 left-0 bottom-0 z-0">
         <ul class="mt-10 space-y-8">
             <li>
-                <a href="/dashboard" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('dashboard') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
+                <a href="/dashboarduser" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('dashboard') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M10 2L2 8v10h6v-6h4v6h6V8l-8-6z"/>
                     </svg>
@@ -47,15 +47,7 @@
                 </a>
             </li>
             <li>
-                <a href="/employee" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('employee') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                    <span>Employee</span>
-                </a>
-            </li>
-            <li>
-                <a href="/absense" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('absense') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
+                <a href="/absenseuser" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('absense') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -89,6 +81,7 @@
         </li>
     </div>
     </aside>
+
     <!-- Content Area -->
     <div id="navbar" class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
     <button id="menu-toggle" class="text-white focus:outline-none md:hidden space-x-3 px-6">
@@ -123,72 +116,14 @@
             </a>
         </button>
 
-        <span class="text-lg text-white">Hi, Robby</span>
+        <span class="text-lg text-white">Hi, Budi</span>
     </div>
     </div>
 
     <!-- Main Content -->
     <div id="content" class="p-6 mt-20 ml-64">
-    <h3 class="text-lg">Hello, Admin</h3>
-    <h1 class="text-3xl font-bold">Welcome to Your Profile!</h1>
-
-    <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
-    <!-- Profile Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
-        <div class="flex items-center space-x-4">
-            <img src="https://via.placeholder.com/80" alt="Profile" class="w-16 h-16 rounded-full">
-            <div>
-                <h2 class="text-xl font-semibold">Alexa Rawles</h2>
-                <p class="text-gray-500 text-sm">alexarawles@gmail.com</p>
-            </div>
-        </div>
-        <button class="bg-yellow-500 text-white px-5 py-2 rounded-lg hover:bg-yellow-600 mt-4 sm:mt-0">
-            Edit
-        </button>
-    </div>
-
-    <!-- Profile Details -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        <div class="w-full">
-            <label class="text-gray-600 text-sm">Username</label>
-            <input type="text" value="Admin Roti Enak" disabled 
-                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
-        </div>
-        <div class="w-full">
-            <label class="text-gray-600 text-sm">Email</label>
-            <input type="text" value="rotienak.id@gmail.com" disabled 
-                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
-        </div>
-        <div class="w-full">
-            <label class="text-gray-600 text-sm">Phone</label>
-            <input type="text" value="08123456789" disabled 
-                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
-        </div>
-        <div class="w-full">
-            <label class="text-gray-600 text-sm">Address</label>
-            <input type="text" value="Jl. Krangganan 7, Cibubur, Bekasi" disabled 
-                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
-        </div>
-        <div class="w-full">
-            <label class="text-gray-600 text-sm">Role</label>
-            <input type="text" value="Admin" disabled 
-                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
-        </div>
-        <div class="w-full">
-            <label class="text-gray-600 text-sm">Gender</label>
-            <input type="text" value="Male" disabled 
-                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
-        </div>
-    </div>
-
-    <!-- Back Button -->
-    <div class="mt-6 flex justify-end">
-        <button class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
-            Back
-        </button>
-    </div>
-</div>
-
+    <h3 class="text-lg">Hello, Budi</h3>
+    <h1 class="text-3xl font-bold">Welcome to Dashboard!</h1>
     </div>
 </div>
 
@@ -203,6 +138,6 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
-            </script>
+            </script>   
     </body>
 </html>

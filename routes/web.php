@@ -29,3 +29,11 @@ Route::get('/leave', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
+
+Route::get('/dashboarduser', function () {
+    return view('dashboarduser');
+});
+
+Route::get('/absenseuser', function () {
+    return view('absenseuser');
+});

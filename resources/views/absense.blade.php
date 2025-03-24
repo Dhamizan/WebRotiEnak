@@ -9,6 +9,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        @vite(['resources/css/style.css'])
 
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -33,11 +34,11 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="flex h-screen bg-gray-100">
-    
-    <!-- Sidebar -->
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out md:translate-x-0 md:relative z-50">
     <div class="w-64 bg-white shadow-lg flex flex-col absolute top-16 left-0 bottom-0 z-0">
         <ul class="mt-10 space-y-8">
-        <li>
+            <li>
                 <a href="/dashboard" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('dashboard') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M10 2L2 8v10h6v-6h4v6h6V8l-8-6z"/>
@@ -87,9 +88,15 @@
                 </a>
         </li>
     </div>
-    
-    <!-- Content Area -->
-    <div class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
+    </aside>
+    <!-- navbar -->
+    <div id="navbar" class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
+    <button id="menu-toggle" class="text-white focus:outline-none md:hidden space-x-3 px-6">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
     <!-- Logo di Kiri -->
     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-auto">
     <div class="space-x-3 px-6">
@@ -122,7 +129,7 @@
 </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
+    <div id="content" class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
         <h3 class="text-lg">Hello, Admin</h3>
         <h1 class="text-3xl font-bold">Welcome to Absense!</h1>
         
@@ -197,5 +204,17 @@
     </div>
             </div>
 
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const menuToggle = document.getElementById('menu-toggle');
+                    const sidebar = document.getElementById('sidebar');
+                    const mainContent = document.querySelector('.main-content');
+
+                    menuToggle.addEventListener('click', function () {
+                        sidebar.classList.toggle('-translate-x-full');
+                        mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
+                    });
+                });
+            </script>
     </body>
 </html>
