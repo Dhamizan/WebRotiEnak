@@ -148,7 +148,7 @@
             </div>
 
             <!-- Modal (Popup) -->
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden:">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 class="text-xl font-bold text-center">Add Employee</h2>
             <p class="text-sm text-gray-500 text-center mb-4">Fill in the required details to add an employee</p>
