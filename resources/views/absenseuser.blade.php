@@ -34,21 +34,21 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="flex h-screen bg-gray-100">
-    
-    <!-- Sidebar -->
+
     <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out md:translate-x-0 md:relative z-50">
     <div class="w-64 bg-white shadow-lg flex flex-col absolute top-16 left-0 bottom-0 z-0">
         <ul class="mt-10 space-y-8">
-        <li>
-                <a href="/dashboarduser" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('dashboard') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
+            <li>
+                <a href="/dashboard" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('dashboard') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M10 2L2 8v10h6v-6h4v6h6V8l-8-6z"/>
                     </svg>
                     <span>Dashboard</span>
                 </a>
             </li>
+            
             <li>
-                <a href="/absenseuser" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('absense') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
+                <a href="/absense" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('absense') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -82,14 +82,14 @@
         </li>
     </div>
     </aside>
-    
-    <!-- Content Area -->
+    <!-- navbar -->
     <div id="navbar" class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
     <button id="menu-toggle" class="text-white focus:outline-none md:hidden space-x-3 px-6">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
     </button>
+
     <!-- Logo di Kiri -->
     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-auto">
     <div class="space-x-3 px-6">
@@ -117,14 +117,14 @@
             </a>
         </button>
 
-        <span class="text-lg text-white">Hi, Budi</span>
+        <span class="text-lg text-white">Hi, Robby</span>
     </div>
 </div>
 
     <!-- Main Content -->
     <div id="content" class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
-        <h3 class="text-lg">Hello, Budi</h3>
-        <h1 class="text-3xl font-bold">Welcome to Absense!</h1>
+        <h3 class="text-lg text-black">Hello, Admin</h3>
+        <h1 class="text-3xl font-bold text-black">Welcome to Absense!</h1>
         
         <div class="space-y-4 w-full mt-12 overflow-x-auto">
         <div class="relative">
@@ -134,65 +134,55 @@
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.293 3.707l3.853 3.854a1 1 0 11-1.414 1.414l-3.854-3.853A6 6 0 012 8z" clip-rule="evenodd"/>
         </svg>
     </div>
-            <table class="text-left w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                            <div class="flex items-center space-x-4">
-                                <span>Outlet</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                                </svg>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Check In</span>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Check Out</span>
-                            </div>
-                        </th>
-                        <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                        <div class="flex items-center space-x-4">
-                                <span>Working Hours</span>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">12 Desember 2024</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">12 Desember 2024</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">12 Desember 2024</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                    <tr>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">1</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">12 Desember 2024</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">08.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">16.00</td>
-                        <td class="py-4 px-6 bg-white font-bold uppercase text-sm">07.56.30</td>
-                    </tr>
-                </tbody>
-            </table>
+    <table class="min-w-full leading-normal">
+    <thead>
+        <tr>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">
+                No
+            </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortOutlet()">
+                <div class="flex items-center space-x-4">
+                    <span>Outlet</span>
+                    <svg id="sortIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">Check In</div></th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+                <div class="flex items-center space-x-4">Check Out</div></th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
+            <div class="flex items-center space-x-4">Check OutWorking Hours</div></th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        <tr>
+            <td class="py-4 px-6 bg-white">1</td>
+            <td class="py-4 px-6 bg-white">Lian Smith</td>
+            <td class="py-4 px-6 bg-white">08:00</td>
+            <td class="py-4 px-6 bg-white">16:00</td>
+            <td class="py-4 px-6 bg-white">07:56:30</td>
+        </tr>
+        <tr>
+            <td class="py-4 px-6 bg-white">2</td>
+            <td class="py-4 px-6 bg-white">Admin Roti Enak</td>
+            <td class="py-4 px-6 bg-white">08:00</td>
+            <td class="py-4 px-6 bg-white">16:00</td>
+            <td class="py-4 px-6 bg-white">07:56:30</td>
+        </tr>
+        <tr>
+            <td class="py-4 px-6 bg-white">3</td>
+            <td class="py-4 px-6 bg-white">Outlet XYZ</td>
+            <td class="py-4 px-6 bg-white">08:00</td>
+            <td class="py-4 px-6 bg-white">16:00</td>
+            <td class="py-4 px-6 bg-white">07:56:30</td>
+        </tr>
+    </tbody>
+</table>
+
         </div>
     </div>
             </div>
@@ -208,6 +198,40 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
+
+                let sortDirections = [true]; // True = ASC, False = DESC
+
+                function sortOutlet() {
+                    let table = document.getElementById("tableBody");
+                    let rows = Array.from(table.rows);
+
+                    let direction = sortDirections[0] ? 1 : -1;
+                    sortDirections[0] = !sortDirections[0];
+
+                    rows.sort((a, b) => {
+                        let aData = a.cells[1].innerText.toLowerCase();
+                        let bData = b.cells[1].innerText.toLowerCase();
+                        return aData > bData ? direction : aData < bData ? -direction : 0;
+                    });
+
+                    // Pastikan "No" tetap urut dari 1 sampai n
+                    rows.forEach((row, index) => {
+                        row.cells[0].innerText = index + 1;
+                        table.appendChild(row);
+                    });
+
+                    updateSortIcon();
+                }
+
+                function updateSortIcon() {
+                    let icon = document.getElementById("sortIcon");
+                    if (sortDirections[0]) {
+                        icon.style.transform = "rotate(0deg)"; // ASC
+                    } else {
+                        icon.style.transform = "rotate(180deg)"; // DESC
+                    }
+                }
+
             </script>
     </body>
 </html>

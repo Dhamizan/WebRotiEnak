@@ -129,8 +129,8 @@
 
     <!-- Main Content -->
     <div id="content" class="p-6 mt-20 ml-64">
-    <h3 class="text-lg">Hello, Admin</h3>
-    <h1 class="text-3xl font-bold">Welcome to Your Profile!</h1>
+    <h3 class="text-lg text-black">Hello, Admin</h3>
+    <h1 class="text-3xl font-bold text-black">Welcome to Your Profile!</h1>
 
     <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
     <!-- Profile Header -->

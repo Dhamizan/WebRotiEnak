@@ -72,7 +72,7 @@
             </li>
         </ul>
         <li class="mt-auto mb-6">
-        <a href="/home" class="flex items-center space-x-3 px-6 text-red-500 hover:text-red-700">
+        <a href="/logout" class="flex items-center space-x-3 px-6 text-red-500 hover:text-red-700">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                 </svg>
@@ -81,7 +81,7 @@
         </li>
     </div>
     </aside>
-    <!-- navbar -->
+    <!-- Content Area -->
     <div id="navbar" class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
     <button id="menu-toggle" class="text-white focus:outline-none md:hidden space-x-3 px-6">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -121,8 +121,66 @@
 
     <!-- Main Content -->
     <div id="content" class="p-6 mt-20 ml-64">
-    <h3 class="text-lg">Hello, Admin</h3>
-    <h1 class="text-3xl font-bold">Welcome to Dashboard!</h1>
+    <h3 class="text-lg text-black">Hello, Admin</h3>
+    <h1 class="text-3xl font-bold text-black">Welcome to Your Profile!</h1>
+
+    <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+    <!-- Profile Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
+        <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/80" alt="Profile" class="w-16 h-16 rounded-full">
+            <div>
+                <h2 class="text-xl font-semibold">Alexa Rawles</h2>
+                <p class="text-gray-500 text-sm">alexarawles@gmail.com</p>
+            </div>
+        </div>
+        <button class="bg-yellow-500 text-white px-5 py-2 rounded-lg hover:bg-yellow-600 mt-4 sm:mt-0">
+            Edit
+        </button>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Username</label>
+            <input type="text" value="Admin Roti Enak" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Email</label>
+            <input type="text" value="rotienak.id@gmail.com" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Phone</label>
+            <input type="text" value="08123456789" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Address</label>
+            <input type="text" value="Jl. Krangganan 7, Cibubur, Bekasi" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Role</label>
+            <input type="text" value="Admin" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Gender</label>
+            <input type="text" value="Male" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="mt-6 flex justify-end">
+        <button class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
+            Back
+        </button>
+    </div>
+</div>
+
     </div>
 </div>
 

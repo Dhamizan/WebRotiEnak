@@ -44,14 +44,6 @@
                 </a>
             </li>
             <li>
-                <a href="/employee" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('employee') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                    <span>Employee</span>
-                </a>
-            </li>
-            <li>
                 <a href="/absense" class="flex items-center space-x-3 px-6 hover:text-yellow-500 {{ request()->is('absense') ? 'text-yellow-500 font-bold' : 'text-gray-500' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -127,8 +119,8 @@
 
     <!-- Main Content -->
     <div id="content" class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
-        <h3 class="text-lg text-black">Hello, Admin</h3>
-        <h1 class="text-3xl font-bold text-black">Welcome to Employee!</h1>
+    <h3 class="text-lg text-black">Hello, Admin</h3> 
+    <h1 class="text-3xl font-bold text-black">Welcome to Vacation!</h1>
         
         <div class="space-y-4 w-full mt-12 overflow-x-auto">
             <div class="flex justify-between items-center mb-6">
@@ -148,10 +140,11 @@
             </div>
 
             <!-- Modal (Popup) -->
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-xl font-bold text-center">Add Employee</h2>
-            <p class="text-sm text-gray-500 text-center mb-4">Fill in the required details to add an employee</p>
+            <h2 class="text-xl font-bold text-center">Taking Leave</h2>
+            <p class="text-sm text-gray-500 text-center mb-4">Fill in the details required for leave application</p>
+
 
             <!-- Form -->
             <form>
@@ -164,22 +157,15 @@
                     <input type="email" class="w-full p-2 border rounded-lg bg-gray-100">
                 </div>
                 <div class="mb-3">
-                    <label class="block text-gray-700">Phone</label>
-                    <input type="text" class="w-full p-2 border rounded-lg bg-gray-100">
+                    <label class="block text-gray-700">Start Date</label>
+                    <input type="date" class="w-full p-2 border rounded-lg bg-gray-100">
                 </div>
                 <div class="mb-3">
-                    <label class="block text-gray-700">Address</label>
-                    <input type="text" class="w-full p-2 border rounded-lg bg-gray-100">
+                    <label class="block text-gray-700">End Date</label>
+                    <input type="date" class="w-full p-2 border rounded-lg bg-gray-100">
                 </div>
                 <div class="mb-3">
-                    <label class="block text-gray-700">Gender</label>
-                    <select class="w-full p-2 border rounded-lg bg-gray-100">
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="block text-gray-700">Role</label>
+                    <label class="block text-gray-700">Relief Officer</label>
                     <select class="w-full p-2 border rounded-lg bg-gray-100">
                         <option>Admin</option>
                         <option>Employee</option>
@@ -207,7 +193,8 @@
                 No
             </div>
             </th>
-            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(1)">
+        
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(2)">
                 <div class="flex items-center space-x-4">
                     <span>Outlet</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -216,18 +203,9 @@
                 </div>
             </th>
 
-            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(2)">
-                <div class="flex items-center space-x-4">
-                    <span>Leader Area</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                    </svg>
-                </div>
-            </th>
-
             <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(3)">
                 <div class="flex items-center space-x-4">
-                    <span>Phone</span>
+                    <span>Start Date</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
                     </svg>
@@ -236,7 +214,15 @@
 
             <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(4)">
                 <div class="flex items-center space-x-4">
-                    <span>Address</span>
+                    <span>End date</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
+                    </svg>
+                </div>
+            </th>
+            <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortTable(4)">
+                <div class="flex items-center space-x-4">
+                    <span>Status</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
                     </svg>

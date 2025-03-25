@@ -130,8 +130,8 @@
 
     <!-- Main Content -->
     <div id="content" class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
-        <h3 class="text-lg">Hello, Admin</h3>
-        <h1 class="text-3xl font-bold">Welcome to Absense!</h1>
+        <h3 class="text-lgtext-black text-black">Hello, Admin</h3>
+        <h1 class="text-3xl font-bold text-black">Welcome to Absense!</h1>
         
         <div class="space-y-4 w-full mt-12 overflow-x-auto">
         <div class="relative">
