@@ -26,11 +26,14 @@
         .nav-item:hover { background: #1947ee; }
         .account-link:hover { background: #3d68ff; }
             </style>
+            <script src="https://unpkg.com/lucide@latest"></script>
+            <script>
+            lucide.createIcons();
+            </script>
         @endif
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="flex h-screen bg-gray-100">
-    
     <!-- Sidebar -->
     <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out md:translate-x-0 md:relative z-50">
     <div class="w-64 bg-white shadow-lg flex flex-col absolute top-16 left-0 bottom-0 z-0">
@@ -86,7 +89,6 @@
         </li>
     </div>
     </aside>
-    <!-- revisi -->
     <!-- Content Area -->
     <div id="navbar" class="w-full h-16 bg-customYellow shadow-md flex items-center px-6 fixed top-0 left-0 right-0 z-10">
     <button id="menu-toggle" class="text-white focus:outline-none md:hidden space-x-3 px-6">
@@ -123,74 +125,72 @@
 
         <span class="text-lg text-white">Hi, Robby</span>
     </div>
-</div>
+    </div>
 
     <!-- Main Content -->
-    <div id="content" class="flex-1 p-6 mt-20 ml-64 overflow-x-auto">
-        <h3 class="text-lg">Hello, Admin</h3>
-        <h1 class="text-3xl font-bold">Welcome to Salary!</h1>
-        
-        <div class="space-y-4 w-full mt-12 overflow-x-auto">
-        <div class="relative">
-        <input type="text" placeholder="Search..." 
-            class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.293 3.707l3.853 3.854a1 1 0 11-1.414 1.414l-3.854-3.853A6 6 0 012 8z" clip-rule="evenodd"/>
-        </svg>
+    <div id="content" class="p-6 mt-20 ml-64">
+    <h3 class="text-lg">Hello, Admin</h3>
+    <h1 class="text-3xl font-bold">Welcome to Your Profile!</h1>
+
+    <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+    <!-- Profile Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
+        <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/80" alt="Profile" class="w-16 h-16 rounded-full">
+            <div>
+                <h2 class="text-xl font-semibold">Alexa Rawles</h2>
+                <p class="text-gray-500 text-sm">alexarawles@gmail.com</p>
+            </div>
+        </div>
+        <button class="bg-yellow-500 text-white px-5 py-2 rounded-lg hover:bg-yellow-600 mt-4 sm:mt-0">
+            Edit
+        </button>
     </div>
-    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                    <div class="flex items-center space-x-2">No</div></th>
-                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b cursor-pointer" onclick="sortOutlet()">
-                        <div class="flex items-center space-x-2">
-                            <span>Outlet</span>
-                            <svg id="sortIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path>
-                            </svg>
-                        </div>
-                    </th>
-                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                    <div class="flex items-center space-x-2">Role</div></th>
-                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                    <div class="flex items-center space-x-2">Working Hours</div></th>
-                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                    <div class="flex items-center space-x-2">Salary</div></th>
-                    <th class="py-4 px-6 bg-white font-bold uppercase text-sm text-gray-600 border-b">
-                    <div class="flex items-center space-x-2"></div></th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <tr class="border-b">
-                    <td class="py-4 px-6 bg-white">1</td>
-                    <td class="py-4 px-6 bg-white">Robby Susanto</td>
-                    <td class="py-4 px-6 bg-white">Leader Area</td>
-                    <td class="py-4 px-6 bg-white">07:56:30</td>
-                    <td class="py-4 px-6 bg-white">Rp. 350.000</td>
-                    <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
-                </tr>
-                <tr class="border-b">
-                    <td class="py-4 px-6 bg-white">2</td>
-                    <td class="py-4 px-6 bg-white">Admin Roti Enak</td>
-                    <td class="py-4 px-6 bg-white">Staff</td>
-                    <td class="py-4 px-6 bg-white">08:00:00</td>
-                    <td class="py-4 px-6 bg-white">Rp. 300.000</td>
-                    <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
-                </tr>
-                <tr class="border-b">
-                    <td class="py-4 px-6 bg-white">3</td>
-                    <td class="py-4 px-6 bg-white">Outlet XYZ</td>
-                    <td class="py-4 px-6 bg-white">Cashier</td>
-                    <td class="py-4 px-6 bg-white">07:45:30</td>
-                    <td class="py-4 px-6 bg-white">Rp. 320.000</td>
-                    <td class="py-4 px-6 bg-white font-bold uppercase text-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"> <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" /> </svg>
-                </tr>
-            </tbody>
-        </table>
+
+    <!-- Profile Details -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Username</label>
+            <input type="text" value="Admin Roti Enak" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Email</label>
+            <input type="text" value="rotienak.id@gmail.com" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Phone</label>
+            <input type="text" value="08123456789" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Address</label>
+            <input type="text" value="Jl. Krangganan 7, Cibubur, Bekasi" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Role</label>
+            <input type="text" value="Admin" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
+        </div>
+        <div class="w-full">
+            <label class="text-gray-600 text-sm">Gender</label>
+            <input type="text" value="Male" disabled 
+                class="w-full mt-1 p-3 border rounded-lg bg-gray-100 text-gray-700 text-base">
         </div>
     </div>
-            </div>
+
+    <!-- Back Button -->
+    <div class="mt-6 flex justify-end">
+        <button class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
+            Back
+        </button>
+    </div>
+</div>
+
+    </div>
+</div>
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
@@ -203,26 +203,6 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
-
-                let ascending = true;
-
-                function sortOutlet() {
-                    let table = document.getElementById("tableBody");
-                    let rows = Array.from(table.rows);
-
-                    rows.sort((a, b) => {
-                        let outletA = a.cells[1].textContent.trim().toLowerCase();
-                        let outletB = b.cells[1].textContent.trim().toLowerCase();
-                        
-                        return ascending ? outletA.localeCompare(outletB) : outletB.localeCompare(outletA);
-                    });
-
-                    ascending = !ascending;
-                    rows.forEach(row => table.appendChild(row));
-
-                    let sortIcon = document.getElementById("sortIcon");
-                    sortIcon.classList.toggle("rotate-180");
-                }
             </script>
     </body>
 </html>

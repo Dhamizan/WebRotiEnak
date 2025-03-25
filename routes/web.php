@@ -43,6 +43,28 @@ Route::get('/leave', function () {
     return view('leave');
 });
 
+ dev-nika
+Route::get('/profile', function () {
+    return view('profile');
+});
+
+Route::get('/dashboarduser', function () {
+    return view('dashboarduser');
+});
+
+Route::get('/absenseuser', function () {
+    return view('absenseuser');
+});
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
 //Route::get('/login', function () {
 //    return response()->json(['message' => 'Silakan login terlebih dahulu'], 401);
 //})->name('login');
+ main
