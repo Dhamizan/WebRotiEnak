@@ -108,12 +108,6 @@
 
     <!-- Ikon di Kanan -->
     <div class="flex items-center space-x-4">
-        <!-- Notifikasi -->
-        <button class="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c3.866 0 7 3.134 7 7v3.5l1.5 2V17H3v-1.5l1.5-2V10c0-3.866 3.134-7 7-7zM10.5 21h3a1.5 1.5 0 0 1-3 0z"/>
-            </svg>
-        </button>
 
         <button class="relative">
             <a href="/profile">
@@ -129,10 +123,93 @@
 
     <!-- Main Content -->
     <div id="content" class="p-6 mt-20 ml-64">
-    <h3 class="text-lg">Hai, Admin</h3>
-    <h1 class="text-3xl font-bold">Selamat Datang di Dashboard!</h1>
-    </div>
-</div>
+        <h3 class="text-lg">Hai, Robby</h3>
+        <h1 class="text-3xl font-bold">Selamat Datang di Dashboard!</h1>
+
+        <div class="container mx-auto px-4 py-6">
+            <!-- Card Section -->
+            <div class="flex flex-wrap gap-4 justify-center">
+                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-lg flex items-center gap-3 shadow-md w-56">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                    </svg>
+                    <div>
+                        <p class="font-bold">Daftar</p>
+                        <p class="text-sm">5 Pegawai</p>
+                    </div>
+                </div>
+                <div class="bg-white text-black px-6 py-4 rounded-lg flex items-center gap-3 shadow-md w-56">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                    </svg>
+                    <div>
+                        <p class="font-bold">Cuti</p>
+                        <p class="text-sm">1 Pegawai</p>
+                    </div>
+                </div>
+                <div class="bg-white text-black px-6 py-4 rounded-lg flex items-center gap-3 shadow-md w-56">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                    </svg>
+                    <div>
+                        <p class="font-bold">Kehadiran</p>
+                        <p class="text-sm">2 Pegawai</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing Between Tables -->
+            <div class="my-6"></div>
+                
+            <div class="overflow-x-auto">
+            <table id="dataTable" class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+                <thead class="bg-white">
+                    <tr>
+                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">No</th>
+                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Pengguna</th>
+                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Jam Kerja</th>
+                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi lewat JS -->
+                </tbody>
+            </table>
+
+            <!-- Pagination Controls -->
+            <div class="flex justify-between items-center mt-1 px-2 bg-white">
+                <span class="text-sm font-bold">Halaman:</span>
+                <select id="pageSelect" class="border px-3 py-1 rounded-md text-sm">
+                    <!-- Options diisi via JS -->
+                </select>
+                <span class="text-sm" id="pageInfo">1 - X dari Y</span>
+            </div>
+
+            <!-- Spacing Between Tables -->
+            <div class="my-6"></div>
+
+            <!-- Second Table Section -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">No</th>
+                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Pengguna</th>
+                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Jam Kerja</th>
+                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Gaji</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-1 px-2 bg-white">
+                <label class="font-bold">Halaman:</label>
+                <select id="page-select" class="border rounded px-2 py-1" onchange="changePage()"></select>
+                <span id="pagination-info" class="text-gray-700"></span>
+            </div>
+            </div>
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
@@ -145,6 +222,124 @@
                         mainContent.classList.toggle('sidebar-open'); // Toggle efek margin-left
                     });
                 });
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    const data = [
+                        { no: 1, name: 'Lian Smith', jam_kerja: '-', status: 'Belum Hadir', status_class: 'bg-red-500' },
+                        { no: 2, name: 'Admin Roti Enak', jam_kerja: '07:56:30', status: 'Kerja', status_class: 'bg-yellow-500' },
+                        { no: 3, name: 'Outlet XYZ', jam_kerja: '07:56:30', status: 'Hadir', status_class: 'bg-green-500' },
+                        { no: 4, name: 'Karyawan 4', jam_kerja: '08:00:00', status: 'Hadir', status_class: 'bg-green-500' },
+                        { no: 5, name: 'Karyawan 5', jam_kerja: '-', status: 'Cuti', status_class: 'bg-blue-500' }
+                    ];
+
+                    const perPage = 2;
+                    let currentPage = 1;
+                    const totalPages = Math.ceil(data.length / perPage);
+                    const tableBody = document.getElementById("tableBody");
+                    const pageSelect = document.getElementById("pageSelect");
+                    const pageInfo = document.getElementById("pageInfo");
+
+                    function renderTable() {
+                        tableBody.innerHTML = "";
+                        const start = (currentPage - 1) * perPage;
+                        const end = start + perPage;
+                        const paginatedData = data.slice(start, end);
+
+                        paginatedData.forEach(item => {
+                            const row = `
+                                <tr class="border-b">
+                                    <td class="py-4 px-6">${item.no}</td>
+                                    <td class="py-4 px-6">${item.name}</td>
+                                    <td class="py-4 px-6">${item.jam_kerja}</td>
+                                    <td class="py-4 px-6">
+                                        <span class="px-3 py-1 text-xs font-bold text-white rounded-full ${item.status_class}">
+                                            ${item.status}
+                                        </span>
+                                    </td>
+                                </tr>
+                            `;
+                            tableBody.innerHTML += row;
+                        });
+
+                        pageInfo.innerText = `${start + 1} - ${Math.min(end, data.length)} dari ${data.length}`;
+                    }
+
+                    function renderPagination() {
+                        pageSelect.innerHTML = "";
+                        for (let i = 1; i <= totalPages; i++) {
+                            const option = document.createElement("option");
+                            option.value = i;
+                            option.innerText = i;
+                            pageSelect.appendChild(option);
+                        }
+                        pageSelect.value = currentPage;
+                    }
+
+                    pageSelect.addEventListener("change", function () {
+                        currentPage = parseInt(this.value);
+                        renderTable();
+                    });
+
+                    renderPagination();
+                    renderTable();
+                });
+
+                const data = [
+                    { no: 1, name: "Robby Susanto", time: "07:56:30", salary: "Rp. 350.000" },
+                    { no: 2, name: "Admin Roti Enak", time: "08:00:00", salary: "Rp. 300.000" },
+                    { no: 3, name: "Outlet XYZ", time: "07:45:30", salary: "Rp. 320.000" },
+                    { no: 4, name: "Karyawan A", time: "08:10:30", salary: "Rp. 280.000" },
+                    { no: 5, name: "Karyawan B", time: "07:50:15", salary: "Rp. 290.000" }
+                ];
+
+                const rowsPerPage = 2;
+                let currentPage = 1;
+
+                function displayTable() {
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedData = data.slice(start, end);
+
+            const tableBody = document.getElementById("table-body");
+            tableBody.innerHTML = "";
+
+            paginatedData.forEach((item) => {
+                const row = `
+                    <tr class="border-b">
+                        <td class="py-4 px-6">${item.no}</td>
+                        <td class="py-4 px-6">${item.name}</td>
+                        <td class="py-4 px-6">${item.time}</td>
+                        <td class="py-4 px-6">${item.salary}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+
+            document.getElementById("pagination-info").textContent = 
+                `${start + 1} - ${Math.min(end, data.length)} dari ${data.length}`;
+        }
+
+        function setupPagination() {
+            const totalPages = Math.ceil(data.length / rowsPerPage);
+            const pageSelect = document.getElementById("page-select");
+
+            pageSelect.innerHTML = "";
+            for (let i = 1; i <= totalPages; i++) {
+                let option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                if (i === currentPage) option.selected = true;
+                pageSelect.appendChild(option);
+            }
+        }
+
+        function changePage() {
+            currentPage = parseInt(document.getElementById("page-select").value);
+            displayTable();
+        }
+
+        setupPagination();
+        displayTable();
             </script>
     </body>
 </html>

@@ -108,12 +108,6 @@
 
     <!-- Ikon di Kanan -->
     <div class="flex items-center space-x-4">
-        <!-- Notifikasi -->
-        <button class="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c3.866 0 7 3.134 7 7v3.5l1.5 2V17H3v-1.5l1.5-2V10c0-3.866 3.134-7 7-7zM10.5 21h3a1.5 1.5 0 0 1-3 0z"/>
-            </svg>
-        </button>
 
         <button class="relative">
             <a href="/profile">
@@ -129,8 +123,8 @@
 
     <!-- Main Content -->
     <div id="content" class="p-6 mt-20 ml-64">
-    <h3 class="text-lg">Hello, Admin</h3>
-    <h1 class="text-3xl font-bold">Welcome to Your Profile!</h1>
+    <h3 class="text-lg">Hai, Robby</h3>
+    <h1 class="text-3xl font-bold">Selamat Datang di Profile!</h1>
 
     <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
     <!-- Profile Header -->
