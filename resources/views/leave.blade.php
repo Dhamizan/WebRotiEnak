@@ -183,6 +183,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="flex justify-center items-center mt-2 py-1 px-2 bg-white border-t">
+            <span class="text-sm font-bold">Halaman:</span>
+            <select id="pageSelect" class="border px-3 rounded-md py-1 text-sm mx-2">
+                <!-- Options diisi via JS -->
+            </select>
+            <span class="text-sm" id="pageInfo">1 - X dari Y</span>
+        </div>
         </div>
     </div>
             </div>

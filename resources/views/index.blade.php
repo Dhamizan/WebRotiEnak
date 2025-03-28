@@ -122,9 +122,21 @@
     </div>
 
     <!-- Main Content -->
-    <div id="content" class="p-6 mt-20 ml-64">
+    <div id="content" class="p-6 mt-10 ml-64">
         <h3 class="text-lg">Hai, Robby</h3>
         <h1 class="text-3xl font-bold">Selamat Datang di Dashboard!</h1>
+
+        <div class="container mx-auto px-4 py-6">
+            <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-lg flex items-center gap-3 shadow-md w-56">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                </svg>
+                <div>
+                    <p class="font-bold">Daftar</p>
+                    <p class="text-sm">5 Pegawai</p>
+                </div>
+            </div>
+        </div>
 
         <div class="container mx-auto px-4 py-6">
             <!-- Card Section -->
@@ -158,58 +170,61 @@
                 </div>
             </div>
 
-            <!-- Spacing Between Tables -->
-            <div class="my-6"></div>
-                
-            <div class="overflow-x-auto">
-            <table id="dataTable" class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-                <thead class="bg-white">
-                    <tr>
-                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">No</th>
-                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Pengguna</th>
-                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Jam Kerja</th>
-                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <!-- Data akan diisi lewat JS -->
-                </tbody>
-            </table>
+                <!-- Spacing Between Tables -->
+                <div class="container mx-auto px-4 py-4">
+                    <div class="flex flex-col gap-8">
+                        <!-- Tabel Pertama -->
+                        <div class="overflow-x-auto">
+                            <table id="dataTable" class="min-w-full bg-white border border-gray-200 rounded-lg min-h-[100px] table-fixed">
+                                <thead class="bg-white">
+                                    <tr>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-12">No</th>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-1/3">Pengguna</th>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-1/3">Jam Kerja</th>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-1/4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <!-- Data akan diisi lewat JS -->
+                                </tbody>
+                            </table>
 
-            <!-- Pagination Controls -->
-            <div class="flex justify-between items-center mt-1 px-2 bg-white">
-                <span class="text-sm font-bold">Halaman:</span>
-                <select id="pageSelect" class="border px-3 py-1 rounded-md text-sm">
-                    <!-- Options diisi via JS -->
-                </select>
-                <span class="text-sm" id="pageInfo">1 - X dari Y</span>
-            </div>
+                            <!-- Pagination Controls -->
+                            <div class="flex justify-center items-center mt-2 py-1 px-2 bg-white border-t">
+                                <span class="text-sm font-bold">Halaman:</span>
+                                <select id="pageSelect" class="border px-3 rounded-md py-1 text-sm mx-2">
+                                    <!-- Options diisi via JS -->
+                                </select>
+                                <span class="text-sm" id="pageInfo">1 - X dari Y</span>
+                            </div>
+                        </div>
 
-            <!-- Spacing Between Tables -->
-            <div class="my-6"></div>
+                        <!-- Tabel Kedua -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md min-h-[100px] table-fixed">
+                                <thead class="bg-white">
+                                    <tr>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-12">No</th>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-1/3">Pengguna</th>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-1/3">Jam Kerja</th>
+                                        <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b w-1/4">Gaji</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body"></tbody>
+                            </table>
 
-            <!-- Second Table Section -->
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-                    <thead class="bg-white">
-                        <tr>
-                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">No</th>
-                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Pengguna</th>
-                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Jam Kerja</th>
-                            <th class="py-4 px-6 text-sm font-bold text-gray-600 border-b">Gaji</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body"></tbody>
-                </table>
+                            <!-- Pagination -->
+                            <div class="flex justify-center items-center mt-2 py-1 px-2 bg-white border-t">
+                                <label class="font-bold">Halaman:</label>
+                                <select id="page-select" class="border rounded py-1 px-2 mx-2" onchange="changePage()"></select>
+                                <span id="pagination-info" class="text-gray-700"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Pagination -->
-            <div class="flex justify-between items-center mt-1 px-2 bg-white">
-                <label class="font-bold">Halaman:</label>
-                <select id="page-select" class="border rounded px-2 py-1" onchange="changePage()"></select>
-                <span id="pagination-info" class="text-gray-700"></span>
-            </div>
-            </div>
+        </div>
+    </div>
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
