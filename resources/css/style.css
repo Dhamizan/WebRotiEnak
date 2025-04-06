@@ -1,3 +1,22 @@
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50; /* Lebih tinggi dari sidebar */
+    background-color: #f8b400; /* Warna navbar */
+}
+
+#content {
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 0; /* Awalnya tanpa margin */
+}
+
+#sidebar #main-content {
+    margin-left: 250px; /* Hanya bergeser saat sidebar terbuka */
+}
+
+
 html, body {
     height: 100%;
     width: 100%;
