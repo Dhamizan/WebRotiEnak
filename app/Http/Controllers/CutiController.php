@@ -1,65 +1,71 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Cuti;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CutiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function pengajuanCuti(Request $request){
+        $request->validate([
+            'waktu_mulai' => 'required|date',
+            'waktu_selesai' => 'required|date',
+            'alasan' => 'required|string',
+            'dokumen_pendukung' => 'nullable|string'
+        ]);
+
+        $dokumenPath = null;
+        if ($request->hasFile('dokumen_pendukung')) {
+            $dokumenPath = $request->file('dokumen_pendukung')->store('dokumen_cuti', 'public');
+        }
+
+        $cuti = Cuti::create([
+            'id_pengguna' => Auth::id(),
+            'waktu_mulai' => $request->waktu_mulai,
+            'waktu_selesai' => $request->waktu_selesai,
+            'status' => 0,
+            'alasan' => $request->alasan,
+            'dokumen_pendukung' => $dokumenPath,
+        ]);
+
+        return response()->json([
+            'message' => 'Pengajuan cuti berhasil',
+            'data'=> $cuti
+        ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function kelolaCuti()
     {
-        //
+        $cutis = Cuti::with('pengguna')->get();
+        return view('admin.kelola_cuti', compact('cutis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function penerimaanCuti($id, Request $request)
     {
-        //
-    }
+        \Log::info('Data yang diterima:', $request->all());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cuti $cuti)
-    {
-        //
-    }
+        $request->validate([
+            'status' => 'required|in:1,2',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cuti $cuti)
-    {
-        //
-    }
+        $cuti = Cuti::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cuti $cuti)
-    {
-        //
-    }
+        if ($cuti->status != 0) {
+            return response()->json([
+                'pesan' => 'Status cuti sudah diproses dan tidak dapat diubah lagi.',
+                'data' => $cuti
+            ], 400);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cuti $cuti)
-    {
-        //
+        $cuti->update(['status' => $request->status]);
+
+        \Log::info("Status cuti ID $id diubah menjadi: " . $request->status);
+
+        return response()->json([
+            'pesan' => 'Status cuti berhasil diperbarui',
+            'data' => $cuti
+        ], 200);
     }
 }

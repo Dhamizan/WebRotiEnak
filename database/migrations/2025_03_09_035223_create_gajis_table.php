@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('id_pengguna')->constrained('penggunas')->onDelete('cascade');
             $table->foreignId('id_absensi')->constrained('absensis')->onDelete('cascade');
             $table->decimal('gaji')->nullable();
-            $table->decimal('tunjangan')->nullable();
-            $table->decimal('potongan')->nullable();
             $table->timestamps();
         });
     }

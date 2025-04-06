@@ -1,65 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Absensi;
 use App\Models\Gaji;
-use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class GajiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    public function hitungGaji($pegawai_id){
+        $absensiHariIni = Absensi::where('id_pengguna', $pegawai_id)
+            ->whereNotNull('jam_keluar')
+            ->orderBy('created_at', 'desc')
+            ->first();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        if (!$absensiHariIni) {
+            return response()->json(['message' => 'Pegawai belum absen hari ini'], 400);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $jamMasuk = Carbon::parse($absensiHariIni->jam_masuk);
+        $jamKeluar = Carbon::parse($absensiHariIni->jam_keluar);
+        $jamKerja = $jamKeluar->diffInMinutes($jamMasuk)/60;
+        $gaji = 60000;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Gaji $gaji)
-    {
-        //
-    }
+        $id_absensi = $absensiHariIni->id;
+        
+        // Cek apakah pengguna ada
+        if (!$absensiHariIni->pengguna) {
+            return response()->json(['message' => 'Data pengguna tidak ditemukan'], 404);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Gaji $gaji)
-    {
-        //
-    }
+        // **Simpan gaji ke database**
+        Gaji::create([
+            'id_pengguna' => $pegawai_id,
+            'id_absensi' => $id_absensi,
+            'tanggal' => now(),
+            'jam_kerja' => round($jamKerja, 4),
+            'gaji' => $gaji
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Gaji $gaji)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Gaji $gaji)
-    {
-        //
+        return response()->json([
+            'message' => 'Perhitungan gaji berhasil',
+            'pengguna' => $absensiHariIni->pengguna->nama,
+            'jam_kerja' => round($jamKerja, 4) . ' jam',
+            'gaji' => 'Rp ' . number_format($gaji, 0, ',', '.')
+        ]);
     }
 }

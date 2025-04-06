@@ -1,0 +1,64 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50; /* Lebih tinggi dari sidebar */
+    background-color: #f8b400; /* Warna navbar */
+}
+
+#content {
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 0; /* Awalnya tanpa margin */
+}
+
+#sidebar #main-content {
+    margin-left: 250px; /* Hanya bergeser saat sidebar terbuka */
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+thead {
+    position: sticky;
+    table-layout: fixed;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th:nth-child(1), td:nth-child(1) { width: 5%; }  /* No */
+th:nth-child(2), td:nth-child(2) { width: 35%; } /* Pengguna */
+th:nth-child(3), td:nth-child(3) { width: 30%; } /* Outlet */
+th:nth-child(4), td:nth-child(4) { width: 30%; } /* Status */
+
+tbody {
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+thead, tbody tr {
+    display: table;
+    table-layout: fixed;
+}
+
+tbody tr {
+    height: 50px; /* Sesuaikan dengan kebutuhan */
+}

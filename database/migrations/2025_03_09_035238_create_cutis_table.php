@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignId('id_pengguna')->constrained('penggunas')->onDelete('cascade');
             $table->dateTime('waktu_mulai');
             $table->dateTime('waktu_selesai');
-            $table->boolean('status');
+            $table->tinyInteger('status');
+            $table->string('alasan');
+            $table->string('dokumen_pendukung')->nullable();;
             $table->timestamps();
         });
     }

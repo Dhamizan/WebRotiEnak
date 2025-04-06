@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
+use App\Models\Gerai;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\ResetPasswordLink;
 
 class PenggunaController extends Controller
 {
+    public function pegawai()
+    {
+        $pegawai = Pengguna::all(); // ambil semua data pegawai
+        return view('admin.pegawai', compact('pegawai'));
+    }
+
     public function masuk(Request $request)
     {
         $request->validate([
@@ -26,32 +31,32 @@ class PenggunaController extends Controller
 
         // Cek apakah user ditemukan dan kata sandi cocok
         if (!$pengguna || !Hash::check($request->kata_sandi, $pengguna->kata_sandi)) {
+            
             return response()->json(['message' => 'Email atau kata sandi salah'], 401);
         }
 
-        // Cek role dan generate token
-        if ($pengguna->peran === 1) {
-            $token = $pengguna->createToken('admin-token')->plainTextToken;
+        if (in_array($pengguna->peran, [1, 2])) {
+            $token = $pengguna->createToken('login-token')->plainTextToken;
+        
             return response()->json([
-                'message' => 'Login admin berhasil',
-                'token' => $token
+                'message' => 'Login berhasil',
+                'token' => $token,
+                'peran' => $pengguna->peran == 1 ? 'admin' : 'pegawai' // 👈 kunci di sini
             ]);
-        }
-
-        if ($pengguna->peran === 2) {
-            $token = $pengguna->createToken('user-token')->plainTextToken;
-            return response()->json([
-                'message' => 'Login user berhasil',
-                'token' => $token
-            ]);
-        }
+        }        
 
         return response()->json(['message' => 'Role tidak valid'], 403);
     }
 
     public function keluar (Request $request){
-        auth()->pengguna()->tokens()->delete();
-        return response()->json(['message' => 'Logout berhasil']);
+        $user = Auth::user(); // Ambil user yang sedang login
+
+        if ($user) {
+            $user->tokens()->delete(); // Hapus semua token user
+            return response()->json(['message' => 'Logout berhasil']);
+        }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
     
     public function __construct(){
@@ -77,6 +82,7 @@ class PenggunaController extends Controller
             'email' => 'required|email|unique:penggunas',
             'notelp' => 'required',
             'alamat' => 'required',
+            'gerai' => 'required|exists:gerais,id',
             'kata_sandi' => 'required',
             'peran' => 'required',
             'jenis_kelamin' => 'required'
@@ -87,6 +93,7 @@ class PenggunaController extends Controller
             'email' => $request->email,
             'notelp' => $request->notelp,
             'alamat' => $request->alamat,
+            'gerai' => $request->gerai,
             'kata_sandi' => $request->kata_sandi,
             'peran' => $request->peran,
             'jenis_kelamin' => $request->jenis_kelamin
@@ -100,11 +107,20 @@ class PenggunaController extends Controller
                 'email' => $pengguna->email,
                 'notelp' => $request->notelp,
                 'alamat' => $request->alamat,
+                'gerai' => $request->gerai,
                 'kata_sandi' => $pengguna->kata_sandi,
                 'peran' => $pengguna->peran,
                 'jenis_kelamin' => $request->jenis_kelamin
             ]
         ], 201);
+    }
+
+    public function destroy($id)
+    {
+        $gerai = Pengguna::findOrFail($id);
+        $gerai->delete();
+
+        return response()->json(['message' => 'Pegawai berhasil dihapus']);
     }
 
     public function membuatSidikJari(Request $request, $id) {
@@ -133,8 +149,6 @@ class PenggunaController extends Controller
     public function lihatKaryawan(){
         return response()->json(Pengguna::all());
     }
-    
-    
 
     public function kirimTautanPengaturanUlang(Request $request)
     {
@@ -150,10 +164,10 @@ class PenggunaController extends Controller
         }
 
         // Generate backend signed URL
-        $signedUrl = URL::temporarySignedRoute('reset.password', now()->addMinutes(5), ['email' => $request->email]);
+        $signedUrl = URL::temporarySignedRoute('reset.password.form', now()->addMinutes(60), ['email' => $request->email]);
 
         // Buat URL untuk dikirim ke frontend
-        $url_frontend = env('FRONTEND_URL') . '/reset-password?backend_url=' . urlencode($signedUrl);
+        $url_frontend = $signedUrl;
 
         // Kirimkan email
         Mail::to($request->email)->send(new ResetPasswordLink($url_frontend, $pengguna->name));
@@ -177,7 +191,7 @@ class PenggunaController extends Controller
         $pengguna = Pengguna::where('email', $request->email)->firstOrFail();
 
         $pengguna->update([
-            'kata_sandi' => Hash::make($request->kata_sandi)
+            'kata_sandi' =>$request->kata_sandi
         ]);
 
         return response()->json(['message' => 'Kata sandi telah diubah']);
@@ -237,5 +251,39 @@ class PenggunaController extends Controller
         } else {
             return response()->json(['message' => 'Gagal memperbarui status verifikasi'], 500);
         }
+    }
+
+    public function suntingProfil(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'notelp' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string|max:255',
+            'kata_sandi' => 'nullable|min:6|confirmed',
+            'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
+            'gambar_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $user->nama = $validated['nama'];
+        $user->notelp = $validated['notelp'] ?? $user->notelp;
+        $user->alamat = $validated['alamat'] ?? $user->alamat;
+        $user->jenis_kelamin = $validated['jenis_kelamin'] ?? $user->jenis_kelamin;
+
+        if ($request->hasFile('gambar_profil')) {
+            $file = $request->file('gambar_profil');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/profil'), $filename);
+            $user->gambar_profil = 'uploads/profil/' . $filename;
+        }
+
+        if (!empty($validated['kata_sandi'])) {
+            $user->kata_sandi = Hash::make($validated['kata_sandi']);
+        }
+
+        $user->save();
+
+        return response()->json(['message' => 'Profil berhasil diperbarui', 'data' => $user]);
     }
 }

@@ -42,7 +42,12 @@ return [
         ],
 
         'api' => [
-            'driver' => 'sanctum', // atau 'sanctum' jika pakai Laravel Sanctum
+            'driver' => 'sanctum',
+            'provider' => 'penggunas',
+        ],
+
+            'admin' => [ // Tambahkan ini
+            'driver' => 'sanctum',
             'provider' => 'penggunas',
         ],
     ],

@@ -12,6 +12,6 @@ class Absensi extends Authenticatable
 
     public function pengguna()
     {
-        return $this->belongsTo(Pengguna::class);
+        return $this->belongsTo(Pengguna::class, 'id_pengguna');
     }
 }
