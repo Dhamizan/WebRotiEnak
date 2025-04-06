@@ -196,8 +196,8 @@
                             </svg>
                             </div>
                             <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Pasien</h3>
-                            <p class="text-sm text-gray-500">Total 120 orang</p>
+                            <h3 class="text-xl font-semibold text-gray-800">Pegawai</h3>
+                            <p class="text-sm text-gray-500">Total: 120 Pegawai</p>
                             </div>
                         </div>
                     </div>
@@ -213,8 +213,8 @@
                             </svg>
                             </div>
                             <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Dokter</h3>
-                            <p class="text-sm text-gray-500">Total 45 orang</p>
+                            <h3 class="text-xl font-semibold text-gray-800">Gerai</h3>
+                            <p class="text-sm text-gray-500">Total: 14 Gerai</p>
                             </div>
                         </div>
                     </div>
@@ -231,8 +231,8 @@
                             </svg>
                             </div>
                             <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Kunjungan</h3>
-                            <p class="text-sm text-gray-500">Hari ini: 32 pasien</p>
+                            <h3 class="text-xl font-semibold text-gray-800">Kehadiran</h3>
+                            <p class="text-sm text-gray-500">Saat ini: 32 Pegawai</p>
                             </div>
                         </div>
                     </div>
@@ -248,7 +248,7 @@
                             </svg>
                             </div>
                             <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Antrian</h3>
+                            <h3 class="text-xl font-semibold text-gray-800">Cuti</h3>
                             <p class="text-sm text-gray-500">Saat ini: 12 orang</p>
                             </div>
                         </div>
