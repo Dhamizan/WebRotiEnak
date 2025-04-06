@@ -17,17 +17,17 @@
     "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
     "main": "postcss.config.js",
     "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "serve": "concurrently \"php artisan serve\" \"npm run dev\""
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "concurrently \"php artisan serve\" \"npm run dev\""
     },
     "directories": {
-      "test": "tests"
+        "test": "tests"
     },
     "dependencies": {
-      "@heroicons/vue": "^2.2.0",
+        "@heroicons/vue": "^2.2.0",
         "asynckit": "^0.4.0",
-      "autoprefixer": "^10.4.21",
+        "autoprefixer": "^10.4.21",
         "call-bind-apply-helpers": "^1.0.2",
         "combined-stream": "^1.0.8",
         "delayed-stream": "^1.0.0",
@@ -46,20 +46,20 @@
         "has-symbols": "^1.1.0",
         "has-tostringtag": "^1.0.2",
         "hasown": "^2.0.2",
+        "lucide-vue-next": "^0.487.0",
         "math-intrinsics": "^1.1.0",
         "mime-db": "^1.52.0",
         "mime-types": "^2.1.35",
         "nanoid": "^3.3.8",
         "picocolors": "^1.1.1",
         "picomatch": "^2.3.1",
-      "postcss": "^8.5.3",
+        "postcss": "^8.5.3",
         "proxy-from-env": "^1.1.0",
         "rollup": "^3.29.5",
         "source-map-js": "^1.2.1",
-      "vite-plugin-full-reload": "^1.2.0"
+        "vite-plugin-full-reload": "^1.2.0"
     },
     "keywords": [],
     "author": "",
     "license": "ISC"
-  }
-  
+}

@@ -10,5 +10,5 @@ Route::get('/admin/dashboard', function () {
 });
 
 Route::get('/masuk', function () {
-    return Inertia::render('Auth/masuk');
+    return Inertia::render('Autentikasi/Masuk');
 });
