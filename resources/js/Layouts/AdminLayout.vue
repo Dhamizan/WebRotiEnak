@@ -28,8 +28,7 @@ const currentRoute = page.url
 <template>
   <div class="min-h-screen bg-gray-100 flex flex-col">
     <!-- Navbar -->
-    <header class="shadow px-6 py-4 flex justify-between items-center text-white"
-            style="background: linear-gradient(to right, #FEB412, #EC8119);">
+    <header class="shadow px-6 py-4 flex justify-between items-center text-white" style="background: linear-gradient(to right, #FEB412, #EC8119);">
       <div class="flex items-center space-x-4">
         <!-- Hamburger (mobile only) -->
         <button class="sm:hidden focus:outline-none" @click="toggleSidebar">
@@ -38,12 +37,15 @@ const currentRoute = page.url
             <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <div class="text-xl font-bold">
-          Roti Enak
+        <div class="flex items-center space-x-3">
+          <img src="/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full" />
+          <div class="text-xl font-bold">Roti Enak</div>
         </div>
       </div>
-
-      <div class="block sm:block text-white">Halo, Admin</div>
+      <div class="flex items-center space-x-3 text-white">
+          <span>Hai, Admin</span>
+          <img src="/images/logo.png" alt="Admin" class="w-8 h-8 rounded-full border border-white" />
+      </div>
     </header>
 
     <div class="flex flex-1">

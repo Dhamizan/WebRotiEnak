@@ -2,8 +2,14 @@
     import { Head, useForm } from '@inertiajs/vue3';
     import { onMounted } from 'vue';
     import { useAuth } from '@/Composables/useAuth';
-    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import AuthenticatedLayout from '@/Layouts/AdminLayout.vue';
     import { ref, computed } from 'vue';
+    import {
+        Users,
+        Store,
+        CalendarCheck,
+        Plane
+    } from 'lucide-vue-next'
 
     // Saat halaman di-mount
     onMounted(async () => {
@@ -189,11 +195,8 @@
                     <!-- Card 1 -->
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center space-x-4">
-                            <div class="bg-blue-100 text-blue-500 p-3 rounded-full">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h4l3 10h8l3-10h4" />
-                            </svg>
+                            <div class="bg-yellow-100 text-yellow-500 p-3 rounded-full">
+                            <Users class="w-6 h-6" />
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Pegawai</h3>
@@ -205,12 +208,8 @@
                     <!-- Card 2 -->
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center space-x-4">
-                            <div class="bg-green-100 text-green-500 p-3 rounded-full">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 8c1.333-1.333 4-1.333 5.333 0C18.667 9.333 18.667 12 17.333 13.333L12 18l-5.333-4.667C5.333 12 5.333 9.333 6.667 8c1.333-1.333 4-1.333 5.333 0z" />
-                            </svg>
+                            <div class="bg-yellow-100 text-yellow-500 p-3 rounded-full">
+                            <Store class="w-6 h-6" />
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Gerai</h3>
@@ -223,12 +222,7 @@
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center space-x-4">
                             <div class="bg-yellow-100 text-yellow-500 p-3 rounded-full">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6h13" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11l6 6" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h6" />
-                            </svg>
+                            <CalendarCheck class="w-6 h-6" />
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Kehadiran</h3>
@@ -240,12 +234,8 @@
                     <!-- Card 4 -->
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center space-x-4">
-                            <div class="bg-red-100 text-red-500 p-3 rounded-full">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 14l2-2 4 4M7 10h.01M12 10h.01M17 10h.01" />
-                            </svg>
+                            <div class="bg-yellow-100 text-yellow-500 p-3 rounded-full">
+                                <Plane class="w-6 h-6" />
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Cuti</h3>
@@ -315,7 +305,7 @@
                             <p class="text-xs text-gray-500">{{ cuti.outlet }}</p>
                             </div>
                             <button
-                            class="text-blue-600 text-sm hover:underline focus:outline-none"
+                            class="bg-yellow-500 p-2 text-white text-sm hover:underline focus:outline-none"
                             @click="lihatCuti(cuti)"
                             >
                             Lihat
@@ -324,7 +314,7 @@
                     </ul>
     
                     <!-- Pagination Cuti -->
-                    <div v-if="cutiList.length > cutiItemsPerPage" class="flex justify-between items-center px-6 py-4 bg-white border-t rounded-b-lg">
+                    <div v-if="cutiList.length > cutiItemsPerPage" class="flex justify-between items-center px-6 py-5 bg-white border-t rounded-b-lg">
                         <div class="text-sm text-gray-600">
                             Data {{ (cutiCurrentPage - 1) * cutiItemsPerPage + 1 }} -
                             {{ Math.min(cutiCurrentPage * cutiItemsPerPage, cutiList.length) }} dari
