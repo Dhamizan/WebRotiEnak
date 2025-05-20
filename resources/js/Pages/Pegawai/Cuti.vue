@@ -157,7 +157,7 @@
 
           closeModal();
           fetchCutisList();
-          resultMessage.value = 'Gerai berhasil ditambahkan!';
+          resultMessage.value = 'Berhasil mengajukan cuti!';
           showResultModal.value = true;
       } catch (error) {
           console.error('Gagal mengajukan cuti:', error);
