@@ -14,6 +14,8 @@
     const currentPage = ref(1);
     const itemsPerPage = 8;
     const selectedBulan = ref('');
+    const showResultModal = ref(false);
+    const resultMessage = ref('');
     const bulanList = computed(() => {
         const bulanSet = new Set();
 
@@ -154,13 +156,18 @@
           });
 
           closeModal();
-          fetchCutisList(); // refresh list cuti
-          alert('Pengajuan cuti berhasil!');
+          fetchCutisList();
+          resultMessage.value = 'Gerai berhasil ditambahkan!';
+          showResultModal.value = true;
       } catch (error) {
           console.error('Gagal mengajukan cuti:', error);
           alert('Terjadi kesalahan saat mengajukan cuti.');
       }
   };
+
+  const closeResultModal = () => {
+    showResultModal.value = false;
+  }
 </script>
 <template>
     <PegawaiLayout>
@@ -322,6 +329,25 @@
           </div>
 
           <button @click="closeModal" class="absolute top-2 right-6 text-gray-400 hover:text-gray-700">✕</button>
+        </div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div
+        v-if="showResultModal"
+        class="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center"
+      >
+        <div class="bg-white w-full max-w-sm rounded-xl shadow-lg p-6 space-y-4 relative">
+          <h3 class="text-lg font-semibold text-green-600">Berhasil</h3>
+          <p class="text-gray-700">{{ resultMessage }}</p>
+          <div class="flex justify-end">
+            <button
+              @click="closeResultModal"
+              class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow"
+            >
+              Tutup
+            </button>
+          </div>
         </div>
       </div>
     </transition>
