@@ -11,14 +11,15 @@ class Gerai extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_gerai',
+        'gerai',
         'alamat',
-        'pegawai_id', // kepala toko
+        'lat',
+        'long',
+        'jumlah_pegawai',
+        'jenis_gerai',
     ];
 
-    // Relasi: kepala toko
-    public function kepalaToko()
-    {
-        return $this->belongsTo(Pengguna::class, 'pegawai_id');
+    public function pengguna(){
+        return $this->hasMany(Pengguna::class, 'gerai_id');
     }
 }

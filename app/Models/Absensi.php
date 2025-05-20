@@ -14,4 +14,5 @@ class Absensi extends Authenticatable
     {
         return $this->belongsTo(Pengguna::class, 'id_pengguna');
     }
+    
 }

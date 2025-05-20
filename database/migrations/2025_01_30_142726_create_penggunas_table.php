@@ -12,8 +12,8 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('notelp');
             $table->string('alamat');
-            $table->unsignedBigInteger('gerai')->nullable();
-            $table->foreign('gerai')->references('id')->on('gerais')->onDelete('cascade');
+            $table->unsignedBigInteger('gerai_id')->nullable();
+            $table->foreign('gerai_id')->references('id')->on('gerais')->onDelete('cascade');
             $table->string('kata_sandi');
             $table->integer('peran');
             $table->string('jenis_kelamin');

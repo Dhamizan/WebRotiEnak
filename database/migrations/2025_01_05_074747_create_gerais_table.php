@@ -8,9 +8,12 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('gerais', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_gerai');
+            $table->string('gerai');
             $table->string('alamat');
-            $table->unsignedBigInteger('pegawai_id')->nullable(); // nanti jadi kepala toko
+            $table->decimal('lat',10,8)->nullable();
+            $table->decimal('long',11,8)->nullable();
+            $table->integer('jumlah_pegawai')->nullable();
+            $table->string('jenis_gerai')->nullable();
             $table->timestamps();
         });
     }

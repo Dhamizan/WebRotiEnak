@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Absensi;
 use App\Models\Gaji;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class GajiController extends Controller
 {
@@ -43,6 +44,25 @@ class GajiController extends Controller
             'pengguna' => $absensiHariIni->pengguna->nama,
             'jam_kerja' => round($jamKerja, 4) . ' jam',
             'gaji' => 'Rp ' . number_format($gaji, 0, ',', '.')
+        ]);
+    }
+    public function lihatGaji($id){
+        $gaji = Gaji::where('id_pengguna', $id)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $gaji
+        ]);
+    }
+
+    public function lihatGajiPegawai(){
+        $user = Auth::user();
+        
+        $gaji = Gaji::where('id_pengguna', $user->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $gaji
         ]);
     }
 }

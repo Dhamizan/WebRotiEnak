@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted, ref } from 'vue'
-  import AdminLayout from '@/Layouts/AdminLayout.vue'
+  import PegawaiLayout from '@/Layouts/PegawaiLayout.vue'
   import axios from 'axios'
   import { useAuth } from '@/Composables/useAuth'
   import { router } from '@inertiajs/vue3'
@@ -22,10 +22,10 @@
   const geraiList = ref([])
 
   onMounted(async () => {
-    await useAuth('admin')
+    await useAuth('pegawai')
 
     try {
-      const res = await axios.get('/api/admin', {
+      const res = await axios.get('/api/pegawai-profil', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -117,13 +117,32 @@
     router.visit('/verifikasi-akun')
   }
 
+  // const kirimResetPasswordLink = async () => {
+  //   try {
+  //     await axios.post('/api/reset-password-link', {
+  //       email: pegawai.value.email,
+  //     }, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //       }
+  //     })
+
+  //     resultMessage.value = 'Link telah dikirim ke emailmu.'
+  //     showResultModal.value = true
+  //   } catch (error) {
+  //     console.error('Gagal kirim link reset password:', error)
+  //     resultMessage.value = 'Gagal mengirim link reset password.'
+  //     showResultModal.value = true
+  //   }
+  // }
+
   const goBack = () => {
     window.history.back()
   }
 </script>
 
 <template>
-  <AdminLayout>
+  <PegawaiLayout>
     <div class="p-6 mt-10 w-full">
       <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
@@ -155,7 +174,6 @@
             </div>
           </div>
         </div>
-
         <div v-if="pegawai" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <div class="w-full">
             <label class="text-gray-600 text-sm">Posisi</label>
@@ -195,12 +213,12 @@
 
         <div class="mt-6 flex justify-end">
           <button class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600" @click="goBack">
-            Kembali
+            Back
           </button>
         </div>
       </div>
     </div>
-  </AdminLayout>
+  </PegawaiLayout>
   <transition name="fade">
     <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white rounded-lg w-full max-w-xl p-6 relative">
@@ -224,6 +242,7 @@
           </select>
           <input type="file" @change="handleFileChange" class="w-full p-2 border rounded" />
         </div>
+
         <div class="flex justify-end mt-4 space-x-2">
           <button @click="showModal = false" class="px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg">
             Batal
@@ -254,12 +273,12 @@
         </div>
       </div>
     </transition>
-</template>
-<style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-</style>
+  </template>
+  <style scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+  }
+  </style>

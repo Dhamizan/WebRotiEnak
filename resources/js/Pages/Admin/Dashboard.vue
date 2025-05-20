@@ -1,194 +1,125 @@
 <script setup>
-    import { Head, useForm } from '@inertiajs/vue3';
-    import { onMounted } from 'vue';
-    import { useAuth } from '@/Composables/useAuth';
-    import AuthenticatedLayout from '@/Layouts/AdminLayout.vue';
-    import { ref, computed } from 'vue';
-    import {
-        Users,
-        Store,
-        CalendarCheck,
-        Plane
-    } from 'lucide-vue-next'
+import { onMounted, ref, computed } from 'vue';
+import axios from 'axios';
+import { useAuth } from '@/Composables/useAuth';
+import AuthenticatedLayout from '@/Layouts/AdminLayout.vue';
+import { router } from '@inertiajs/vue3';
+import {
+    Users,
+    Store,
+    CalendarCheck,
+    Plane
+} from 'lucide-vue-next';
 
-    // Saat halaman di-mount
-    onMounted(async () => {
-    const auth = await useAuth('admin')
-    if (auth) {
-        user.value = auth.user
+const absensiToday = ref([]);
+const pegawaiList = ref([]);
+const totalPegawai = ref(0);
+const geraiList = ref([]);
+const totalGerai = ref(0);
+const cutiPending = ref([]);
+const selectedGerai = ref(null);
+const currentPage = ref(1);
+const itemsPerPage = 6;
+const cutiCurrentPage = ref(1);
+const cutiItemsPerPage = 4;
+
+const paginatedPegawai = computed(() => {
+    let filtered = selectedGerai.value
+        ? pegawaiList.value.filter(p => p.gerai === selectedGerai.value)
+        : pegawaiList.value;
+    return filtered.slice((currentPage.value - 1) * itemsPerPage, currentPage.value * itemsPerPage);
+});
+
+const visiblePages = computed(() => {
+    const totalPages = Math.ceil(pegawaiList.value.length / itemsPerPage);
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+});
+
+const goToPage = (page) => {
+    currentPage.value = page;
+};
+
+const paginatedCuti = computed(() => {
+    return cutiPending.value.slice((cutiCurrentPage.value - 1) * cutiItemsPerPage, cutiCurrentPage.value * cutiItemsPerPage);
+});
+
+const visibleCutiPages = computed(() => {
+    const totalPages = Math.ceil(cutiPending.value.length / cutiItemsPerPage);
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+});
+
+const goToCutiPage = (page) => {
+    cutiCurrentPage.value = page;
+};
+
+const lihatCuti = (cuti) => {
+    router.visit(`/admin/cuti/rincian?id=${cuti.id_pengguna}`)
+};
+
+onMounted(async () => {
+    await useAuth('admin')
+    await fetchAbsensiToday()
+    await fetchGerai()
+    await fetchCutiPending();
+
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('/api/pegawai', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            const todayIds = absensiToday.value
+                .filter(a => a.jam_masuk !== null)
+                .map(a => a.id_pengguna);
+
+
+            pegawaiList.value = response.data.data.map(p => ({
+                id: p.id,
+                nama: p.nama,
+                gerai: p.gerai?.gerai || 'Tidak diketahui',
+                status: todayIds.includes(p.id) ? 'Hadir' : 'Tidak Hadir'
+            }));
+
+        totalPegawai.value = pegawaiList.value.length;
+
+    } catch (error) {
+        console.error('Gagal mengambil data:', error);
     }
-    })
+});
 
-    const props = defineProps({
-        email: {
-            type: String,
-            required: true,
-        },
-        token: {
-            type: String,
-            required: true,
-        },
-    });
+const fetchAbsensiToday = async () => {
+  try {
+    const response = await axios.get('/api/absensi-today')
+    absensiToday.value = response.data.data
+  } catch (error) {
+    console.error('Gagal ambil data absensi hari ini:', error)
+  }
+}
 
-    const form = useForm({
-        token: props.token,
-        email: props.email,
-        password: '',
-        password_confirmation: '',
-    });
+const fetchGerai = async () => {
+  try {
+    const response = await axios.get('/api/gerai');
+    geraiList.value = response.data.data;
+    totalGerai.value = geraiList.value.length;
+  } catch (error) {
+    console.error('Gagal ambil data gerai:', error);
+  }
+}
 
-    const submit = () => {
-        form.post(route('password.store'), {
-            onFinish: () => form.reset('password', 'password_confirmation'),
-        });
-    };
+const fetchCutiPending = async () => {
+  try {
+    const response = await axios.get('/api/cuti-pending')
+    cutiPending.value = response.data.data
+  } catch (error) {
+    console.error('Gagal ambil data cuti pending:', error)
+  }
+}
 
-    const pegawaiList = ref([
-    { nama: 'Rina', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Budi', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Tina', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Rudi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Dina', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Andi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Siti', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Wawan', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Hana', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Dina', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Andi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Siti', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Wawan', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Hana', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Dina', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Andi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Siti', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Wawan', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Hana', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Dina', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Andi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Siti', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Wawan', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Hana', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Andi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Siti', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Wawan', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Hana', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Dina', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Andi', outlet: 'Outlet C', status: 'Aktif' },
-    { nama: 'Siti', outlet: 'Outlet A', status: 'Aktif' },
-    { nama: 'Wawan', outlet: 'Outlet B', status: 'Aktif' },
-    { nama: 'Hana', outlet: 'Outlet C', status: 'Aktif' },
-    ])
-
-    const currentPage = ref(1)
-    const itemsPerPage = 6
-
-    const selectedOutlet = ref('')
-
-    const filteredPegawai = computed(() => {
-    if (!selectedOutlet.value) return pegawaiList.value
-    return pegawaiList.value.filter(p => p.outlet === selectedOutlet.value)
-    })
-
-    const totalPages = computed(() => Math.ceil(pegawaiList.value.length / itemsPerPage))
-
-    const paginatedPegawai = computed(() => {
-    const start = (currentPage.value - 1) * itemsPerPage
-    return filteredPegawai.value.slice(start, start + itemsPerPage)
-    })
-
-    function goToPage(page) {
-        if (page >= 1 && page <= totalPages.value) {
-            currentPage.value = page
-        }
-    }
-
-    const visiblePages = computed(() => {
-    const pages = []
-    const maxVisible = 3
-    const total = totalPages.value
-    const current = currentPage.value
-
-    let start = Math.max(current - Math.floor(maxVisible / 2), 1)
-    let end = start + maxVisible - 1
-
-    if (end > total) {
-        end = total
-        start = Math.max(end - maxVisible + 1, 1)
-    }
-
-    for (let i = start; i <= end; i++) {
-        pages.push(i)
-    }
-
-    return pages
-    })
-
-    const cutiList = [
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Rizki Hidayat', outlet: 'Outlet C' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Rizki Hidayat', outlet: 'Outlet C' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Rizki Hidayat', outlet: 'Outlet C' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Rizki Hidayat', outlet: 'Outlet C' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Rizki Hidayat', outlet: 'Outlet C' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Aulia Rahma', outlet: 'Outlet B' },
-    { nama: 'Rizki Hidayat', outlet: 'Outlet C' },
-    ]
-
-    function lihatCuti(cuti) {
-    // contoh: tampilkan alert, nanti bisa diganti modal atau navigasi
-    alert(`Lihat permintaan cuti dari ${cuti.nama} - ${cuti.outlet}`)
-    }
-
-    const cutiCurrentPage = ref(1)
-    const cutiItemsPerPage = 5
-
-    const totalCutiPages = computed(() => Math.ceil(cutiList.length / cutiItemsPerPage))
-
-    const paginatedCuti = computed(() => {
-        const start = (cutiCurrentPage.value - 1) * cutiItemsPerPage
-        return cutiList.slice(start, start + cutiItemsPerPage)
-    })
-
-    function goToCutiPage(page) {
-    if (page >= 1 && page <= totalCutiPages.value) {
-        cutiCurrentPage.value = page
-    }
-    }
-
-    const visibleCutiPages = computed(() => {
-        const pages = []
-        const maxVisible = 3
-        const total = totalCutiPages.value
-        const current = cutiCurrentPage.value
-
-        let start = Math.max(current - Math.floor(maxVisible / 2), 1)
-        let end = start + maxVisible - 1
-
-        if (end > total) {
-            end = total
-            start = Math.max(end - maxVisible + 1, 1)
-    }
-
-    for (let i = start; i <= end; i++) {
-        pages.push(i)
-    }
-
-        return pages
-    })
 </script>
 <template>
     <AuthenticatedLayout>
-        <div class="py-2">
+        <div class="py-0">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-0">
                 <!-- Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -200,7 +131,7 @@
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Pegawai</h3>
-                            <p class="text-sm text-gray-500">Total: 120 Pegawai</p>
+                            <p class="text-sm text-gray-500">Total: {{ totalPegawai }} Pegawai</p>
                             </div>
                         </div>
                     </div>
@@ -213,7 +144,7 @@
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Gerai</h3>
-                            <p class="text-sm text-gray-500">Total: 14 Gerai</p>
+                            <p class="text-sm text-gray-500">Total: {{ totalGerai }} Gerai</p>
                             </div>
                         </div>
                     </div>
@@ -226,7 +157,7 @@
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Kehadiran</h3>
-                            <p class="text-sm text-gray-500">Saat ini: 32 Pegawai</p>
+                            <p class="text-sm text-gray-500">Total: {{ absensiToday.length }} Pegawai</p>
                             </div>
                         </div>
                     </div>
@@ -239,7 +170,7 @@
                             </div>
                             <div>
                             <h3 class="text-xl font-semibold text-gray-800">Cuti</h3>
-                            <p class="text-sm text-gray-500">Saat ini: 12 orang</p>
+                            <p class="text-sm text-gray-500">Total: {{ cutiPending.length }} Pegawai</p>
                             </div>
                         </div>
                     </div>
@@ -255,21 +186,24 @@
                             <tr>
                                 <th class="px-6 py-4 font-medium">No</th>
                                 <th class="px-6 py-4 font-medium">Pegawai</th>
-                                <th class="px-6 py-4 font-medium">Outlet</th>
+                                <th class="px-6 py-4 font-medium">Gerai</th>
                                 <th class="px-6 py-4 font-medium">Status</th>
                             </tr>
                             </thead>
                             <tbody class="text-gray-700 divide-y divide-gray-200">
-                            <tr v-for="(pegawai, index) in paginatedPegawai" :key="index" :class="['hover:bg-gray-100 transition', index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50']">
+                            <tr v-for="(pegawai, index) in paginatedPegawai" :key="index" :class="['hover:bg-gray-200 transition', index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50']">
                                 <td class="px-6 py-4 text-sm">
-                                {{ (currentPage - 1) * itemsPerPage + index + 1 }}
+                                    {{ (currentPage - 1) * itemsPerPage + index + 1 }}
                                 </td>
                                 <td class="px-6 py-4 text-sm">{{ pegawai.nama }}</td>
-                                <td class="px-6 py-4 text-sm">{{ pegawai.outlet }}</td>
+                                <td class="px-6 py-4 text-sm">{{ pegawai.gerai }}</td>
                                 <td class="px-6 py-4">
-                                <span class="inline-block px-3 py-1 text-xs rounded-full bg-green-100 text-green-700 font-medium">
+                                    <span 
+                                    class="inline-block px-3 py-1 text-xs rounded-full font-medium"
+                                    :class="pegawai.status === 'Hadir' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
+                                    >
                                     {{ pegawai.status }}
-                                </span>
+                                    </span>
                                 </td>
                             </tr>
                             </tbody>
@@ -277,11 +211,19 @@
                         <!-- Pagination Pegawai -->
                         <div class="flex justify-between items-center px-6 py-4 bg-white border-t">
                             <div class="text-sm text-gray-600"> {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ Math.min(currentPage * itemsPerPage, pegawaiList.length) }} dari {{ pegawaiList.length }}</div>
-                            <select id="outletFilter" v-model="selectedOutlet" class="w-[30%] max-w-xs border border-gray-300 text-sm rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Semua Outlet</option>
-                                <option value="Outlet A">Outlet A</option>
-                                <option value="Outlet B">Outlet B</option>
-                                <option value="Outlet C">Outlet C</option>
+                            <select
+                                id="geraiFilter"
+                                v-model="selectedGerai"
+                                class="w-full md:w-[200px] border border-gray-300 text-sm rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                                >
+                                <option value="">Daftar Gerai</option>
+                                <option
+                                    v-for="gerai in geraiList"
+                                    :key="gerai.id"
+                                    :value="gerai.gerai"
+                                >
+                                    {{ gerai.gerai }}
+                                </option>
                             </select>
                             <div class="space-x-2">
                                 <button v-for="page in visiblePages" :key="page" @click="goToPage(page)" class="px-3 py-1 text-sm border rounded" :class="{ 'bg-yellow-500 text-white': page === currentPage }">
@@ -293,42 +235,45 @@
                 </div>
                 <!-- Permintaan Cuti -->
                 <div class="shadow rounded-lg">
-                    <div class="bg-white px-6 py-4 rounded-t-lg">
-                    <h3 class="text-lg font-semibold text-gray-800">Permintaan Cuti</h3>
+                    <div class="bg-white px-6 py-3 rounded-t-lg">
+                        <h3 class="text-lg font-semibold text-gray-800">Permintaan Cuti</h3>
                     </div>
-    
-                    <ul class="divide-y divide-gray-200">
-                        <li
-                            v-for="(cuti, index) in paginatedCuti" :key="index" :class="[index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50', 'flex items-center justify-between px-6 py-4']">
-                            <div>
-                            <p class="text-sm font-medium text-gray-900">{{ cuti.nama }}</p>
-                            <p class="text-xs text-gray-500">{{ cuti.outlet }}</p>
+
+                    <div v-for="(cuti, index) in paginatedCuti" :key="index" @click="lihatCuti(cuti)" 
+                        :class="[ 
+                            index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50', 
+                            'px-6 py-2.5 border-b hover:bg-gray-200 transition cursor-pointer'
+                        ]">
+                        <div class="flex items-center space-x-4"> <!-- Flex container for name, date, status, and profile image -->
+                            <!-- Nomor Urut -->
+                            <div class="text-gray-600 font-medium">{{ (cutiCurrentPage - 1) * cutiItemsPerPage + index + 1 }}</div> <!-- Menampilkan nomor urut -->
+
+                            <!-- Profile Image -->
+                            <img :src="cuti?.pengguna?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + cuti.pengguna.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
+                            
+                            <!-- Information -->
+                            <div class="flex-1"> <!-- Take remaining space -->
+                                <div class="text-lg font-semibold text-gray-800">{{ cuti.pengguna.nama }}</div>
+                                <div class="text-sm text-gray-600">
+                                    Mengajukan cuti pada 
+                                    {{ new Date(cuti.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) }}
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                    Status: <span class="text-yellow-600 font-medium">Belum diproses</span>
+                                </div>
                             </div>
-                            <button
-                            class="bg-yellow-500 p-2 text-white text-sm hover:underline focus:outline-none"
-                            @click="lihatCuti(cuti)"
-                            >
-                            Lihat
-                            </button>
-                        </li>
-                    </ul>
-    
-                    <!-- Pagination Cuti -->
-                    <div v-if="cutiList.length > cutiItemsPerPage" class="flex justify-between items-center px-6 py-5 bg-white border-t rounded-b-lg">
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div v-if="cutiPending.length > cutiItemsPerPage" class="flex justify-between items-center px-6 py-5 bg-white border-t rounded-b-lg">
                         <div class="text-sm text-gray-600">
-                            Data {{ (cutiCurrentPage - 1) * cutiItemsPerPage + 1 }} -
-                            {{ Math.min(cutiCurrentPage * cutiItemsPerPage, cutiList.length) }} dari
-                            {{ cutiList.length }}
+                            Data {{ (cutiCurrentPage - 1) * cutiItemsPerPage + 1 }} - 
+                            {{ Math.min(cutiCurrentPage * cutiItemsPerPage, cutiPending.length) }} dari 
+                            {{ cutiPending.length }}
                         </div>
                         <div class="space-x-2">
-                            <button
-                            v-for="page in visibleCutiPages"
-                            :key="page"
-                            @click="goToCutiPage(page)"
-                            class="px-3 py-1 text-sm border rounded"
-                            :class="{ 'bg-yellow-500 text-white': page === cutiCurrentPage }"
-                            >
-                            {{ page }}
+                            <button v-for="page in visibleCutiPages" :key="page" @click="goToCutiPage(page)" class="px-3 py-1 text-sm border rounded" :class="{ 'bg-yellow-500 text-white': page === cutiCurrentPage }">
+                                {{ page }}
                             </button>
                         </div>
                     </div>
@@ -337,6 +282,3 @@
         </div>
     </AuthenticatedLayout>
   </template>
-  
-
-  

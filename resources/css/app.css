@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;    
+
+.leaflet-control-layers {
+  font-size: 14px;
+  font-family: sans-serif;
+  
+}
+
+.layers-control-title {
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px;
+  color: #1f2937;
+} 
+
+.leaflet-control-layers-base input[type="radio"] {
+  color: #EAB308; 
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+  box-shadow: none;
+}

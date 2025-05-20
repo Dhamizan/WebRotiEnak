@@ -13,7 +13,7 @@ class Pengguna extends Authenticatable
 
     protected $table = 'penggunas';
 
-    protected $fillable = ['nama', 'email', 'notelp', 'alamat', 'gerai', 'kata_sandi', 'peran', 'jenis_kelamin', 'verifikasi_email', 'id_sidik_jari', 'gambar_profil'];
+    protected $fillable = ['nama', 'email', 'notelp', 'alamat', 'gerai_id', 'kata_sandi', 'peran', 'jenis_kelamin', 'verifikasi_email', 'id_sidik_jari', 'gambar_profil'];
 
     public function getAuthPassword()
     {
@@ -25,15 +25,24 @@ class Pengguna extends Authenticatable
         return $this->kata_sandi;
     }
 
-    // Enkripsi password saat disimpan
     public function setKataSandiAttribute($value)
     {
         $this->attributes['kata_sandi'] = Hash::make($value);
-    }
+    }   
 
-    // Membuat token autentikasi Sanctum
     public function createTokenPengguna()
     {
         return $this->createToken('auth_token')->plainTextToken;
     }
+
+    public function gerai()
+    {
+        return $this->belongsTo(Gerai::class, 'gerai_id');
+    }
+
+    public function absensi()
+    {
+        return $this->belongsTo(Absensi::class, 'absensi_id');
+    }
+
 }

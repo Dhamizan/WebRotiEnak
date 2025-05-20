@@ -1,20 +1,17 @@
 <script setup>
-import { ref,onMounted } from 'vue';
-import axios from 'axios'
-import { router, Link, usePage } from '@inertiajs/vue3';
+import { ref, onMounted } from 'vue'
+import { router, Link, usePage } from '@inertiajs/vue3'
 import {
   LayoutDashboard,
-  Store,
-  Users,
   CalendarCheck,
   Wallet,
   Plane,
   LogOut
-} from 'lucide-vue-next';
+} from 'lucide-vue-next'
 
 onMounted(async () => {
   try {
-    const res = await axios.get('/api/admin', {
+    const res = await axios.get('/api/pegawai-profil', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -24,11 +21,13 @@ onMounted(async () => {
       pegawai.value = res.data.data[0]
     }
   } catch (err) {
-    console.error('Gagal ambil data pegawai di AdminLayout:', err)
+    console.error('Gagal ambil data pegawai di PegawaiLayout:', err)
   }
 })
 
 const pegawai = ref(null);
+
+const isSidebarOpen = ref(false)
 
 const logout = async () => {
   try {
@@ -45,8 +44,6 @@ const logout = async () => {
     console.error('Logout gagal:', error.response);
   }
 };
-
-const isSidebarOpen = ref(false)
 
 function toggleSidebar() {
   isSidebarOpen.value = !isSidebarOpen.value
@@ -73,7 +70,7 @@ const currentRoute = page.url
           <div class="text-xl font-bold">Roti Enak</div>
         </div>
       </div>
-      <Link href="/admin/profil" class="flex items-center space-x-3 text-white hover:opacity-90">
+      <Link href="/pegawai/profil" class="flex items-center space-x-3 text-white hover:opacity-90">
         <span v-if="pegawai" class="font-medium">Hai, {{ pegawai.nama }}</span> 
           <img :src="pegawai?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
       </Link>
@@ -83,28 +80,20 @@ const currentRoute = page.url
       <!-- Sidebar Desktop -->
       <aside class="mt-[50px] w-64 bg-white shadow-md hidden sm:flex flex-col justify-between">
         <nav class="mt-6">
-          <Link href="/admin/dashboard" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/dashboard') }">
+          <Link href="/pegawai/dashboard" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/dashboard') }">
             <LayoutDashboard class="w-6 h-6" /> Dashboard
           </Link>
-          <Link href="/admin/gerai" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/gerai') }">
-            <Store class="w-6 h-6" /> Gerai
-          </Link>
-          <Link href="/admin/pegawai" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/pegawai') }">
-            <Users class="w-6 h-6" /> Pegawai
-          </Link>
-          <Link href="/admin/absensi" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/absensi') }">
+          <Link href="/pegawai/absensi" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/absensi') }">
             <CalendarCheck class="w-6 h-6" /> Absensi
           </Link>
-          <Link href="/admin/gaji" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/gaji') }">
+          <Link href="/pegawai/gaji" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/gaji') }">
             <Wallet class="w-6 h-6" /> Gaji
           </Link>
-          <Link href="/admin/cuti" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/cuti') }">
+          <Link href="/pegawai/cuti" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/cuti') }">
             <Plane class="w-6 h-6" /> Cuti
           </Link>
         </nav>
@@ -126,28 +115,20 @@ const currentRoute = page.url
           <aside class="w-64 bg-white shadow-md flex flex-col justify-between fixed top-0 left-0 h-full z-50 sm:hidden">
             <div class="p-6">
                 <nav class="mt-16">
-                    <Link href="/admin/dashboard" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/dashboard') }">
+                    <Link href="/pegawai/dashboard" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawaI/dashboard') }">
                         <LayoutDashboard class="w-6 h-6" /> Dashboard
                     </Link>
-                    <Link href="/admin/gerai" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/gerai') }">
-                        <Store class="w-6 h-6" /> Gerai
-                    </Link>
-                    <Link href="/admin/pegawai" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/pegawai') }">
-                        <Users class="w-6 h-6" /> Pegawai
-                    </Link>
-                    <Link href="/admin/absensi" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/absensi') }">
+                    <Link href="/pegawai/absensi" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/absensi') }">
                         <CalendarCheck class="w-6 h-6" /> Absensi
                     </Link>
-                    <Link href="/admin/gaji" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/gaji') }">
+                    <Link href="/pegawai/gaji" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/gaji') }">
                         <Wallet class="w-6 h-6" /> Gaji
                     </Link>
-                    <Link href="/admin/cuti" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
-                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/admin/cuti') }">
+                    <Link href="/pegawai/cuti" class="flex items-center gap-6 px-6 py-4 transition duration-200 ease-in-out  hover:text-yellow-500 text-lg"
+                            :class="{ 'bg-white font-semibold text-yellow-500 text-lg': currentRoute.startsWith('/pegawai/cuti') }">
                         <Plane class="w-6 h-6" /> Cuti
                     </Link>
                 </nav>
@@ -171,6 +152,7 @@ const currentRoute = page.url
     </div>
   </div>
 </template>
+
 <style scoped>
 header {
   position: fixed;

@@ -13,34 +13,59 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return response()->json([
         'id' => $request->user()->id,
         'email' => $request->user()->email,
-        'peran' => $request->user()->peran == 1 ? 'admin' : 'pegawai',
-        // tambah field lain sesuai kebutuhan
+        'peran' => $request->user()->peran == 1 ? 'admin' : 'pegawai'
     ]);
 });
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('/admin/dashboard', [PenggunaController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/karyawan/pending', [PenggunaController::class, 'antreanPengguna']);
-    Route::post('/karyawan', [PenggunaController::class, 'tambahKaryawan']);
-    Route::put('/karyawan/{id}/fingerprint', [PenggunaController::class, 'membuatSidikJari']);
-    Route::get('/karyawan', [PenggunaController::class, 'lihatKaryawan']);
-    Route::post('/absensi', [AbsensiController::class, 'rekapAbsensi']);
-    Route::post('/logout', [PenggunaController::class, 'keluar']);
-    Route::put('/edit-profil', [PenggunaController::class, 'suntingProfil']);
-    Route::post('/pengajuan-cuti', [CutiController::class, 'pengajuanCuti']);
-    Route::put('/penerimaan-cuti/{id}', [CutiController::class, 'penerimaanCuti'])->middleware('auth:admin');
-    Route::get('/gerai', [GeraiController::class, 'index']);
-    Route::post('/gerai', [GeraiController::class, 'store']);
-    Route::get('/gerai/{id}', [GeraiController::class, 'show']);
-    Route::put('/gerai/{id}', [GeraiController::class, 'update']);
-    Route::delete('/gerai/{id}', [GeraiController::class, 'destroy']);
-    Route::delete('/karyawan/{id}', [PenggunaController::class, 'destroy']);
+Route::middleware('auth:api')->post('/keluar', function (Request $request) {
+    $user = Auth::user();
+    $user->token()->revoke();
+    return response()->json(['message' => 'Logout berhasil']);
 });
 
-Route::post('/send-verification-email', [PenggunaController::class, 'kirimTautanVerifikasiEmail'])->name('verification.verify');
-Route::get('/verify-email', [PenggunaController::class, 'verifikasiEmail'])->name('verify.email')->middleware('signed');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/pegawai/pending', [PenggunaController::class, 'antreanPengguna']);
+    Route::get('/pegawai/terakhir', [PenggunaController::class, 'pegawaiTerakhir']);
+    Route::post('/pegawai', [PenggunaController::class, 'tambahPegawai']);
+    Route::put('/pegawai/{id}/fingerprint', [PenggunaController::class, 'membuatSidikJari']);
+    Route::get('/admin', [PenggunaController::class, 'lihatAdmin']);
+    Route::get('/pegawai', [PenggunaController::class, 'lihatPegawai']);
+    Route::get('/pegawai-profil', [PenggunaController::class, 'lihatPegawaiProfil']);
+    Route::get('/pegawai/{id}', [PenggunaController::class, 'rincianPegawai']);
+    Route::post('/absensi', [AbsensiController::class, 'rekapAbsensi']);
+    Route::get('/absensi/{id}', [AbsensiController::class, 'lihatAbsensi']);
+    Route::get('/absensi-pegawai', [AbsensiController::class, 'lihatAbsensiPegawai']);
+    Route::post('/sunting/profil', [PenggunaController::class, 'suntingProfil']);
+    Route::post('/keluar', [PenggunaController::class, 'keluar']);
+    Route::post('/pengajuan-cuti', [CutiController::class, 'pengajuanCuti']);
+    Route::get('/lihatcuti-pegawai', [CutiController::class, 'lihatCutiPegawai']);
+    Route::put('/penerimaan-cuti/{id}', [CutiController::class, 'penerimaanCuti'])->middleware('auth:admin');
+    Route::post('/gerai', [GeraiController::class, 'simpanGerai']);
+    Route::get('/gerai', [GeraiController::class, 'LihatGerai']);
+    Route::put('/gerai/{id}', [GeraiController::class, 'suntingGerai']);
+    Route::delete('/gerai/{id}', [GeraiController::class, 'hapusGerai']);
+    Route::delete('/pegawai/{id}', [PenggunaController::class, 'hapusPegawai']);
+    Route::get('/gaji/{id}', [GajiController::class, 'lihatGaji']);
+    Route::get('/gaji-pegawai', [GajiController::class, 'lihatGajiPegawai']);
+    Route::get('/cuti/{id}', [CutiController::class, 'lihatCuti']);
+    Route::get('/absensi-today', [AbsensiController::class, 'absensiHariIni']);
+    Route::get('/cuti', [CutiController::class, 'lihatSemuaCuti']);
+    Route::post('/cuti/penerimaan/{id}', [CutiController::class, 'penerimaanCuti']);
+    Route::get('/cuti-pending', [CutiController::class, 'cutiBelumDiproses']);
+    Route::put('/tes-route', function () {
+        return response()->json(['pesan' => 'Berhasil akses PUT route']);
+    });
+    
+});
+
+Route::post('/kirim-verifikasi-email', [PenggunaController::class, 'kirimTautanVerifikasiEmail'])->name('verification.verify');
+Route::get('/verifikasi-email', [PenggunaController::class, 'verifikasiEmail'])->name('verify.email')->middleware('signed');
 Route::post('/masuk', [PenggunaController::class, 'masuk'])->name('login');
 Route::get('/reset-password', [PenggunaController::class, 'halamanResetPassword'])->middleware('signed')->name('reset.password.form');
 Route::post('/reset-password-link', [PenggunaController::class, 'kirimTautanPengaturanUlang']);
-Route::post('/reset-password', [PenggunaController::class, 'aturUlangKataSandi'])->name('reset.password.submit');
+Route::post('/reset-password', [PenggunaController::class, 'aturUlangKataSandi']);
 Route::get('/hitung-gaji/{id_pengguna}', [GajiController::class, 'hitungGaji']);
+
+Route::middleware('auth:api')->get('/cek-token', function (Request $request) {
+    return response()->json($request->user());
+});

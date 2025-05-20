@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Cuti;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class CutiController extends Controller
@@ -13,7 +12,7 @@ class CutiController extends Controller
             'waktu_mulai' => 'required|date',
             'waktu_selesai' => 'required|date',
             'alasan' => 'required|string',
-            'dokumen_pendukung' => 'nullable|string'
+            'dokumen_pendukung' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048'
         ]);
 
         $dokumenPath = null;
@@ -36,16 +35,40 @@ class CutiController extends Controller
         ], 200);
     }
 
-    public function kelolaCuti()
+    public function lihatCuti($id)
     {
-        $cutis = Cuti::with('pengguna')->get();
-        return view('admin.kelola_cuti', compact('cutis'));
+        $cuti = Cuti::where('id_pengguna', $id)->get();
+        return response()->json([
+            'success' => true,
+            'data' => $cuti
+        ]);
+    }
+     public function lihatCutiPegawai()
+    {
+        $user = Auth::user();
+
+        $cuti = Cuti::with('pengguna') // ambil relasi pengguna
+            ->where('id_pengguna',$user->id)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $cuti
+        ]);
+    }
+
+    public function lihatSemuaCuti()
+    {
+        $pegawai =Cuti::where('peran', 2)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $pegawai
+        ]);
     }
 
     public function penerimaanCuti($id, Request $request)
     {
-        \Log::info('Data yang diterima:', $request->all());
-
         $request->validate([
             'status' => 'required|in:1,2',
         ]);
@@ -68,4 +91,16 @@ class CutiController extends Controller
             'data' => $cuti
         ], 200);
     }
+
+    public function cutiBelumDiproses() {
+        $cuti = Cuti::with('pengguna') // ambil relasi pengguna
+            ->where('status', 0)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $cuti
+        ]);
+    }
+    
 }

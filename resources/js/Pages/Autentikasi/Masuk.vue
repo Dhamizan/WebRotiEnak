@@ -1,9 +1,13 @@
 <script setup>
   import { Head, Link, useForm, router } from '@inertiajs/vue3'
   import { ref, onMounted } from 'vue'
-  import axios from 'axios'
+  import {
+    Mail,
+    Lock,
+    LucideEye,
+    LucideEyeOff,
+  } from 'lucide-vue-next'
 
-  // ✅ Auto redirect jika sudah login
   onMounted(async () => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -76,49 +80,57 @@
       <!-- Form Login -->
       <div class="md:w-1/2 w-full flex items-center justify-center p-6 md:p-10">
         <form @submit.prevent="submit" class="w-full">
-          <h1 class="text-2xl md:text-3xl font-bold text-black text-center">Welcome Back</h1>
-          <p class="text-gray-600 text-sm text-center">Please enter your account</p>
+          <h1 class="text-2xl md:text-3xl font-bold text-black text-center">Selamat Datang!</h1>
+          <p class="text-gray-600 text-sm text-center">Tolong Masukkan Data Akunmu</p>
 
-          <!-- Username -->
-          <div class="mt-6">
-            <label class="block text-sm font-medium text-gray-700">Username</label>
+          <!-- Email -->
+          <div class="mt-2">
+            <label class="block text-sm font-medium text-gray-700">Email</label>
             <div class="relative mt-1">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                <UserIcon class="h-5 w-5" />
+                <Mail class="h-5 w-5" />
               </span>
               <input
                 v-model="form.email"
                 type="text"
-                placeholder="Enter Your Username . . ."
+                placeholder="Masukkan Email . . ."
                 class="w-full pl-10 p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required
               />
             </div>
           </div>
 
-          <!-- Password -->
-          <div class="mt-4">
-            <label class="block text-sm font-medium text-gray-700">Password</label>
+          <!-- Kata Sandi -->
+          <div class="mt-2">
+            <label class="block text-sm font-medium text-gray-700">Kata Sandi</label>
             <div class="relative mt-1">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                <LockClosedIcon class="h-5 w-5" />
+                <Lock class="h-5 w-5" />
               </span>
               <input
                 :type="showPassword ? 'text' : 'password'"
                 v-model="form.kata_sandi"
-                placeholder="Enter Your Password . . ."
+                placeholder="Masukkan Kata Sandi . . ."
                 class="w-full pl-10 pr-10 p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required
               />
               <span @click="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 cursor-pointer">
-                <EyeIcon v-if="!showPassword" class="h-5 w-5" />
-                <EyeOffIcon v-else class="h-5 w-5" />
+                <LucideEyeOff v-if="!showPassword" class="h-5 w-5" />
+                <LucideEye v-else class="h-5 w-5" />
               </span>
             </div>
           </div>
 
+          <div class="mt-2 text-left">
+            <!-- <Link
+              href="/lupa-kata-sandi"
+              class="text-sm text-yellow-500 hover:underline"
+            >
+              Lupa Password?
+            </Link> -->
+          </div>
           <!-- Tombol Login -->
-          <button type="submit" class="mt-6 w-full bg-yellow-400 text-white font-bold py-3 rounded-lg shadow hover:bg-yellow-500">
+          <button type="submit" class="mt-2 w-full bg-yellow-400 text-white font-bold py-3 rounded-lg shadow hover:bg-yellow-500">
             Login
           </button>
         </form>

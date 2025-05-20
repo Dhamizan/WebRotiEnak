@@ -3,49 +3,78 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Gerai;
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
 
 class GeraiController extends Controller
 {
-    public function index()
+    public function lihatGerai()
     {
-        $gerai = Gerai::with('kepalaToko')->get();
-        return response()->json($gerai);
+        $gerai = Gerai::all()->map(function ($item) {
+            $jumlahPegawai = Pengguna::where('gerai_id', $item->id)
+                                ->where('peran', 2)
+                                ->count();
+            $item->jumlah_pegawai = $jumlahPegawai;
+            return $item;
+        });
+    
+        return response()->json([
+            'data' => $gerai,
+            'success' => true
+        ]);
     }
 
-    public function store(Request $request)
+    public function simpanGerai(Request $request)
     {
         $request->validate([
-            'nama_gerai' => 'required|string|max:255',
+            'gerai' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+            'jenis_gerai' => 'required|in:gerai,stan',
         ]);
 
-        $gerai = Gerai::create($request->only(['nama_gerai', 'alamat']));
+        $gerai = Gerai::create(([
+            'gerai' => $request->gerai,
+            'alamat' => $request->alamat,
+            'lat' => $request->lat,
+            'long' => $request->long,
+            'jenis_gerai' => $request->jenis_gerai,
+            'jumlah_pegawai' => 0
+        ]));
 
         return response()->json(['message' => 'Gerai berhasil ditambahkan', 'data' => $gerai]);
     }
 
-    public function show($id)
-    {
-        $gerai = Gerai::with('kepalaToko')->findOrFail($id);
-        return response()->json($gerai);
-    }
+    public function suntingGerai(Request $request, $id)
+{
+    \Log::info('Data yang diterima:', $request->all());  // Log data yang diterima
 
-    public function update(Request $request, $id)
-    {
-        $gerai = Gerai::findOrFail($id);
+    $gerai = Gerai::findOrFail($id);
 
-        $request->validate([
-            'nama_gerai' => 'sometimes|required|string|max:255',
-            'alamat' => 'sometimes|required|string|max:255',
-        ]);
+    $request->validate([
+        'gerai' => 'required|string|max:255',
+        'alamat' => 'required|string|max:255',
+        'lat' => 'required|numeric',
+        'long' => 'required|numeric',
+        'jenis_gerai' => 'required|in:gerai,stan',
+    ]);
 
-        $gerai->update($request->only(['nama_gerai', 'alamat']));
+    $gerai->update([
+        'gerai' => $request->gerai,
+        'alamat' => $request->alamat,
+        'lat' => $request->lat,
+        'long' => $request->long,
+        'jenis_gerai' => $request->jenis_gerai,
+    ]);
 
-        return response()->json(['message' => 'Gerai berhasil diperbarui', 'data' => $gerai]);
-    }
+    return response()->json([
+        'message' => 'Gerai berhasil diperbarui',
+        'data' => $gerai
+    ]);
+}
 
-    public function destroy($id)
+    public function hapusGerai($id)
     {
         $gerai = Gerai::findOrFail($id);
         $gerai->delete();

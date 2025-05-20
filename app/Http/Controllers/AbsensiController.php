@@ -7,6 +7,7 @@ use App\Models\Absensi;
 use App\Models\Pengguna;
 use Carbon\Carbon;
 use App\Http\Controllers\GajiController;
+use Illuminate\Support\Facades\Auth;
 
 class AbsensiController extends Controller{
     protected $gajiController;
@@ -49,11 +50,9 @@ class AbsensiController extends Controller{
         }
 
         if (!$todayAbsensi->jam_keluar) {
-            // Jika sudah ada jam masuk tapi belum ada jam keluar, maka ini dianggap jam keluar
             $jamMasuk = Carbon::parse($todayAbsensi->jam_masuk);
             $jamKeluar = now();
 
-            // Hitung selisih waktu kerja
             $jamKerja = $jamKeluar->diff($jamMasuk)->format('%H:%I:%S');
 
             $todayAbsensi->update([
@@ -61,7 +60,6 @@ class AbsensiController extends Controller{
                 'jam_kerja' => $jamKerja
             ]);
 
-            // Panggil metode hitungGaji di GajiController
             $gajiResponse = $this->gajiController->hitungGaji($pengguna->id);
 
             return response()->json([
@@ -76,4 +74,57 @@ class AbsensiController extends Controller{
 
         return response()->json(['message' => 'Anda sudah absen 2 kali hari ini'], 409);
     }
+
+    public function lihatAbsensi($id) {
+        $absensi = Absensi::where('id_pengguna', $id)->get();
+    
+        return response()->json([
+            'success' => true,
+            'data' => $absensi
+        ]);
+    }
+
+    public function lihatAbsensiPegawai()
+    {
+        $user = Auth::user();
+
+        $absensi = Absensi::where('id_pengguna', $user->id)
+                    ->whereNotNull('jam_masuk')
+                    ->get();
+
+        $data = $absensi->map(function ($item) {
+            $status = null;
+
+            if ($item->jam_masuk && !$item->jam_keluar) {
+                $status = 'Kerja';
+            } elseif ($item->jam_masuk && $item->jam_keluar) {
+                $status = 'Hadir';
+            }
+
+            return [
+                'id' => $item->id,
+                'jam_masuk' => $item->jam_masuk,
+                'jam_keluar' => $item->jam_keluar,
+                'created_at' => $item->created_at->format('Y-m-d'),
+                'jam_kerja' => $item->jam_kerja,
+                'status' => $status,
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+        ]);
+    }
+
+    public function absensiHariIni() {
+        $absensi = Absensi::whereDate('created_at', now())
+                    ->whereNotNull('jam_masuk')
+                    ->get();
+    
+        return response()->json([
+            'success' => true,
+            'data' => $absensi
+        ]);
+    }    
 }
