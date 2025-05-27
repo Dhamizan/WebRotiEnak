@@ -75,7 +75,7 @@ const currentRoute = page.url
       </div>
       <Link href="/admin/profil" class="flex items-center space-x-3 text-white hover:opacity-90">
         <span v-if="pegawai" class="font-medium">Hai, {{ pegawai.nama }}</span> 
-          <img :src="pegawai?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
+          <img :src="pegawai?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
       </Link>
     </header>
 

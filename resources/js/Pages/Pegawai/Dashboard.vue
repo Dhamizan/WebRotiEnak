@@ -192,7 +192,7 @@
                         ]">
                         <div class="flex items-center space-x-4">
                             <div class="text-gray-600 font-medium">{{ (cutiCurrentPage - 1) * cutiItemsPerPage + index + 1 }}</div>
-                            <img :src="cuti?.pengguna?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + cuti.pengguna.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
+                            <img :src="cuti?.pengguna?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + cuti.pengguna.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
                             <div class="flex-1">
                                 <div class="text-lg font-semibold text-gray-800">{{ cuti.pengguna.nama }}</div>
                                 <div class="text-sm text-gray-600">

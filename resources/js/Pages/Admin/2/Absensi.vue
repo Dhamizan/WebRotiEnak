@@ -110,7 +110,7 @@
       <div class="mt-[-10px]">
         <div class="flex justify-between items-center">
           <div v-if="filteredAbsensi.length" class="flex items-center gap-4 w-full">
-            <img :src="pegawaiData?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + pegawaiData.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
+            <img :src="pegawaiData?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + pegawaiData.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
             <div>
               <h2 class="text-lg font-semibold text-gray-800">{{ pegawaiData?.nama }}</h2>
               <p class="text-sm text-gray-600">Dari Gerai: {{ pegawaiData?.gerai?.gerai }}</p>

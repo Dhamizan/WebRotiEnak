@@ -20,38 +20,39 @@ class PenggunaController extends Controller
         return view('admin.pegawai', compact('pegawai'));
     }
 
-    public function masuk(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'kata_sandi' => 'required'
-        ]);
+        public function masuk(Request $request)
+        {
+            \Log::info('Login request:', $request->all());
 
-        $pengguna = Pengguna::where('email', $request->email)->first();
+            $request->validate([
+                'nama' => 'required',
+                'kata_sandi' => 'required'
+            ]);
 
-        if (!$pengguna || !Hash::check($request->kata_sandi, $pengguna->kata_sandi)) {
-            
-            return response()->json(['message' => 'Email atau kata sandi salah'], 401);
+            $pengguna = Pengguna::where('nama', $request->nama)->first();
+
+            if (!$pengguna || !Hash::check($request->kata_sandi, $pengguna->kata_sandi)) {
+                return response()->json(['message' => 'nama atau Kata Sandi Salah'], 401);
+            }
+
+            if (in_array($pengguna->peran, [1, 2, 3])) {
+                $token = $pengguna->createToken('login-token')->plainTextToken;
+
+                $roleNames = [
+                    1 => 'admin',
+                    2 => 'pegawai',
+                    3 => 'fingerprint'
+                ];
+
+                return response()->json([
+                    'message' => 'Masuk Kedalam Akun Berhasil',
+                    'token' => $token,
+                    'peran' => $roleNames[$pengguna->peran] ?? 'tidak diketahui'
+                ]);  
+            }
+
+            return response()->json(['message' => 'Role tidak valid'], 403);
         }
-
-        if (in_array($pengguna->peran, [1, 2, 3])) {
-            $token = $pengguna->createToken('login-token')->plainTextToken;
-
-            $roleNames = [
-                1 => 'admin',
-                2 => 'pegawai',
-                3 => 'fingerprint'
-            ];
-
-            return response()->json([
-                'message' => 'Masuk Kedalam Akun Berhasil',
-                'token' => $token,
-                'peran' => $roleNames[$pengguna->peran] ?? 'tidak diketahui'
-            ]);  
-        }
-
-        return response()->json(['message' => 'Role tidak valid'], 403);
-    }
 
     public function keluar (Request $request){
         $user = Auth::user();
@@ -86,7 +87,7 @@ class PenggunaController extends Controller
     
         if ($belumLengkap) {
             return response()->json([
-                'message' => 'Harap lengkapi data sidik jari pegawai sebelumnya sebelum menambahkan yang baru.'
+                'message' => 'Harap Lengkapi ID Sidik Jari Pegawai Terlebih Dahulu Sebelum Menambahkan Pegawai Baru'
             ], 400);
         }
     
@@ -162,7 +163,7 @@ class PenggunaController extends Controller
         Log::info('Request masuk', ['id' => $id, 'data' => $request->all()]);
 
         return response()->json([
-            'message' => 'Fingerprint registered successfully',
+            'message' => 'Fingerprint Berhasil Didaftarkan',
             'pengguna' => $pengguna
         ], 200);
     }
@@ -248,6 +249,8 @@ class PenggunaController extends Controller
 
     public function aturUlangKataSandi(Request $request)
     {
+        \Log::info('Reset Password Request:', $request->all());
+
         $request->validate([
             'email' => 'required|email',
             'kata_sandi' => 'required'
@@ -255,14 +258,14 @@ class PenggunaController extends Controller
 
         $pengguna = Pengguna::where('email', $request->email)->firstOrFail();
 
-        $pengguna->update([
-            'kata_sandi' =>Hash::make($request->kata_sandi)
-        ]);
+        $pengguna->kata_sandi = $request->kata_sandi;
+        $pengguna->save();
 
-        // $pengguna->kata_sandi = $request->kata_sandi;
-        // $pengguna->save();
+        // $pengguna->update([
+        //     'kata_sandi' =>Hash::make($request->kata_sandi)
+        // ]);
 
-        return response()->json(['message' => 'Kata sandi telah diubah'], 500);
+        return response()->json(['message' => 'Kata sandi telah diubah'], 200);
     }
 
     public function kirimTautanVerifikasiEmail(Request $request)

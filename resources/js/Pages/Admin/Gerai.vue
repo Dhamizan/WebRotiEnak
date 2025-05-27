@@ -45,6 +45,7 @@
       const showResultModal = ref(false)
       const showResultDeleteModal = ref(false)
       const showDeleteModal = ref(false)
+      const showGagalTambahModal = ref(false)
       const selectedGeraiId = ref(null)
       const resultMessage = ref('')
       const lokasiIcon = L.icon({
@@ -148,6 +149,17 @@
       }
 
     async function tambahGerai() {
+      const latBaru = parseFloat(newGerai.value.lat);
+      const longBaru = parseFloat(newGerai.value.long);
+
+      for (const gerai of geraiList.value) {
+        const jarak = hitungJarak(latBaru, longBaru, parseFloat(gerai.lat), parseFloat(gerai.long));
+        if (jarak < 1.5) {
+          showGagalTambahModal.value = true;
+          return;
+        }
+      }
+        
       try {
         const response = await axios.post('/api/gerai', {
           gerai: newGerai.value.gerai,
@@ -262,6 +274,19 @@
     function closeResultModal() {
       showResultModal.value = false
       resultMessage.value = ''
+    }
+
+    function hitungJarak(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radius bumi dalam kilometer
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const jarak = R * c;
+      return jarak;
     }
 
     function closeDeleteiModal() {
@@ -488,6 +513,25 @@
               class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow"
             >
               Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div
+        v-if="showGagalTambahModal"
+        class="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center"
+      >
+        <div class="bg-white w-full max-w-sm rounded-xl shadow-lg p-6 space-y-4 relative">
+          <h3 class="text-lg font-semibold text-yellow-500">Gerai Terlalu Dekat</h3>
+          <p class="text-gray-700">Gerai Baru Harus Lebih Dari 1,5 Km Jaraknya dengan Gerai yang Sudah Ada</p>
+          <div class="flex justify-end space-x-2">
+            <button
+              @click="showGagalTambahModal = false"
+              class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow transition"
+            >
+              Ubah
             </button>
           </div>
         </div>

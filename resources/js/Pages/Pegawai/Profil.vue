@@ -147,26 +147,26 @@
       <div class="max-w-6xl w-full mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
           <div class="flex items-center space-x-4">
-            <img :src="pegawai?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
-            <div>
-              <h2 class="text-xl font-semibold">{{ pegawai?.nama }}</h2>
-              <p class="text-gray-500 text-sm">{{ pegawai?.email }}</p>
+            <img :src="pegawai?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
+            <div class="max w-full">
+              <h2 class="text-xl font-semibold truncate max-w-full">{{ pegawai?.nama }}</h2>
+              <p class="text-gray-500 text-sm truncate max-w-full">{{ pegawai?.email }}</p>
             </div>
           </div>
-          <div class="flex gap-2">
-            <div>
+          <div class="flex flex-col md:flex-row gap-5 items-center gap-0 px-0 py-2">
+            <div class="flex justify-between items-center">
               <button
                 class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600"
                 @click="kirimResetPasswordLink">Edit Password
               </button>
             </div>
-            <div>
+            <div class="flex justify-between items-center">
               <button
                 class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600"
                 @click="goToVerifikasiEmail">Verifikasi Akun
               </button>
             </div>
-            <div>
+            <div class="flex justify-between items-center">
               <button
                 class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600"
                 @click="showModal = true">Edit Profil

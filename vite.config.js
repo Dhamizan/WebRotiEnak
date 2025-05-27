@@ -22,9 +22,9 @@ export default defineConfig({
         port: 5713,
         strictPort: true,
         cors: true,
-        origin: 'http://192.168.63.63:8000',
+        origin: 'http://192.168.195.63:8000',
         hmr: {
-            host: '192.168.63.63'
+            host: '192.168.195.63'
         },
     },
 });

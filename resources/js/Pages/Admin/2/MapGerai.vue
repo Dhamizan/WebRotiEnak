@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useAuth } from '@/Composables/useAuth';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import axios from 'axios';
@@ -8,9 +8,22 @@ import 'leaflet/dist/leaflet.css';
 
 const map = ref(null);
 const geraiList = ref([]);
-const selectedJenis = ref('Semua');
+const selectedJenis = ref('Semua Gerai');
+const selectedWilayah = ref('Semua Wilayah');
+const selectedJumlah = ref('Semua Pegawai');
 
-let markerLayerGroup = L.layerGroup();
+let markerLayerGroup = null; // nanti diinisialisasi di initMap
+
+async function getWilayahFromCoordinates(lat, lon) {
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+    const data = await response.json();
+    return data.address.city || data.address.town || data.address.county || 'Tidak Diketahui';
+  } catch (error) {
+    console.error('Gagal reverse geocoding:', error);
+    return 'Tidak Diketahui';
+  }
+}
 
 onMounted(async () => {
   const auth = await useAuth('admin');
@@ -33,12 +46,26 @@ async function getGeraiList() {
         Accept: 'application/json',
       },
     });
-    geraiList.value = response.data.data || [];
+
+    const data = response.data.data || [];
+
+    for (const gerai of data) {
+      if (gerai.lat && gerai.long) {
+        gerai.wilayah = await getWilayahFromCoordinates(gerai.lat, gerai.long);
+      } else {
+        gerai.wilayah = 'Tidak Diketahui';
+      }
+    }
+    geraiList.value = data;
     updateMarkers();
   } catch (error) {
     console.error('Gagal mengambil data gerai:', error);
   }
 }
+
+const wilayahList = computed(() => {
+  return ['Semua Wilayah', ...new Set(geraiList.value.map(g => g.wilayah))];
+});
 
 function initMap() {
   const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -69,16 +96,17 @@ function initMap() {
     collapsed: false
   }).addTo(map.value);
 
+  // Inisialisasi markerLayerGroup dan tambahkan ke map setelah map dibuat
+  markerLayerGroup = L.layerGroup().addTo(map.value);
+
+  // Tambah judul di layer control
   const container = layerControl.getContainer();
   const title = L.DomUtil.create('div', 'layers-control-title', container);
   title.innerHTML = '<strong>Base Map</strong>';
   title.style.padding = '5px 10px';
   title.style.borderBottom = '1px solid #ccc';
   title.style.backgroundColor = '#fff';
-
   container.insertBefore(title, container.firstChild);
-
-  markerLayerGroup.addTo(map.value);
 }
 
 function addLegend() {
@@ -98,39 +126,55 @@ function addLegend() {
 
 function getColor(jenis) {
   const colors = {
-    'gerai': 'brown ',
+    'gerai': 'brown',
     'stan': 'blue',
   };
   return colors[jenis] || 'gray';
 }
 
 function updateMarkers() {
+  if (!markerLayerGroup) return;
+
   markerLayerGroup.clearLayers();
 
   geraiList.value.forEach((gerai) => {
-    if (gerai.lat && gerai.long) {
-      if (selectedJenis.value === 'Semua' || gerai.jenis_gerai === selectedJenis.value) {
-        const popupContent = `
-          <strong>${gerai.gerai}</strong><br>
-          Kota/Kabupaten: ${gerai.alamat}<br>
-          Pegawai: ${gerai.jumlah_pegawai}<br>
-          Jenis: ${gerai.jenis_gerai}
-        `;
+    const lat = parseFloat(gerai.lat);
+    const long = parseFloat(gerai.long);
+    const wilayah = gerai.wilayah;
 
-        const marker = L.marker([gerai.lat, gerai.long], {
-          icon: L.divIcon({
-            className: 'custom-icon',
-            html: `<div style="background-color:${getColor(gerai.jenis_gerai)}; width:12px; height:12px; border-radius:50%"></div>`,
-          }),
-        });
+    if (
+      !isNaN(lat) && !isNaN(long) &&
+      (selectedJenis.value === 'Semua Gerai' || gerai.jenis_gerai === selectedJenis.value) &&
+      (selectedWilayah.value === 'Semua Wilayah' || wilayah === selectedWilayah.value) &&
+      (
+        selectedJumlah.value === 'Semua Pegawai' ||
+        (selectedJumlah.value === '< Kurang dari 2' && gerai.jumlah_pegawai < 2) ||
+        (selectedJumlah.value === '2 Sampai 4' && gerai.jumlah_pegawai >= 2 && gerai.jumlah_pegawai <= 4) ||
+        (selectedJumlah.value === '> Lebih Dari 4' && gerai.jumlah_pegawai > 4)
+      )
+    ) {
+      const popupContent = `
+        <strong>${gerai.gerai}</strong><br>
+        Kota/Kabupaten: ${gerai.alamat}<br>
+        Pegawai: ${gerai.jumlah_pegawai}<br>
+        Jenis: ${gerai.jenis_gerai}
+      `;
 
-        marker.bindPopup(popupContent).addTo(markerLayerGroup);
-      }
+      const marker = L.marker([lat, long], {
+        icon: L.divIcon({
+          className: 'custom-icon',
+          html: `<div style="background-color:${getColor(gerai.jenis_gerai)}; width:12px; height:12px; border-radius:50%"></div>`,
+        }),
+      });
+
+      marker.bindPopup(popupContent).addTo(markerLayerGroup);
     }
   });
 }
 
 watch(selectedJenis, updateMarkers);
+watch(selectedWilayah, updateMarkers);
+watch(selectedJumlah, updateMarkers);
 
 function exportGeoJSON() {
   const geojson = {
@@ -165,12 +209,25 @@ function exportGeoJSON() {
   <AdminLayout>
     <div class="py-2 space-y-4">
       <div class="flex items-center justify-between">
-        <select v-model="selectedJenis" class="w-full md:w-[200px] border border-gray-300 text-sm rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
-          <option>Semua</option>
-          <option v-for="jenis in [...new Set(geraiList.map(g => g.jenis_gerai))]" :key="jenis">
-            {{ jenis }}
-          </option>
-        </select>
+        <div class="flex gap-2">
+          <select v-model="selectedJenis" class="w-full md:w-[200px] border border-gray-300 text-sm rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
+            <option>Semua Gerai</option>
+            <option v-for="jenis in [...new Set(geraiList.map(g => g.jenis_gerai))]" :key="jenis">
+              {{ jenis }}
+            </option>
+          </select>
+          <select v-model="selectedWilayah" class="w-full md:w-[200px] border border-gray-300 text-sm rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
+            <option v-for="wilayah in wilayahList" :key="wilayah">
+              {{ wilayah }}
+            </option>
+          </select>
+          <select v-model="selectedJumlah" class="w-full md:w-[200px] border border-gray-300 text-sm rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
+            <option>Semua Pegawai</option>
+            <option>&lt; Kurang dari 2</option>
+            <option>2 Sampai 4</option>
+            <option>&gt; Lebih Dari 4</option>
+          </select>
+        </div>
         <button @click="exportGeoJSON" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm shadow transition">
           Export Data
         </button>
@@ -182,5 +239,14 @@ function exportGeoJSON() {
 <style scoped>
 #map {
   height: 500px;
+}
+
+.sidebar {
+  z-index: 1001;
+  position: relative;
+}
+
+.leaflet-container {
+  z-index: 0 !important;
 }
 </style>

@@ -147,7 +147,7 @@
       <div class="mt-[-10px]">
         <div class="flex justify-between items-center">
           <div v-if="filteredCuti.length" class="flex items-center gap-4 w-full">
-            <img :src="pegawaiData?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + pegawaiData.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
+            <img :src="pegawaiData?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + pegawaiData.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
             <div>
               <h2 class="text-lg font-semibold text-gray-800">{{ pegawaiData?.nama }}</h2>
               <p class="text-sm text-gray-600">Dari Gerai: {{ pegawaiData?.gerai?.gerai }}</p>
@@ -209,13 +209,13 @@
                       <div v-if="cuti.status === 0" class="flex gap-2">
                         <button
                           @click="updateStatus(cuti.id, 1)"
-                          class="bg-green-500 text-white text-xs px-2 py-1 rounded hover:bg-green-600"
+                          class="bg-green-500 text-green-700 text-xs px-2 py-1 rounded-lg hover:bg-green-700 text-white transition"
                         >
                           Terima
                         </button>
                         <button
                           @click="updateStatus(cuti.id, 2)"
-                          class="bg-red-500 text-white text-xs px-2 py-1 rounded hover:bg-red-600"
+                          class="bg-red-500 text-red-700 text-xs px-2 py-1 rounded-lg hover:bg-red-700 text-white transition"
                         >
                           Tidak Diterima
                         </button>

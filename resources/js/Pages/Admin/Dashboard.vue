@@ -61,6 +61,13 @@ onMounted(async () => {
     await fetchAbsensiToday()
     await fetchGerai()
     await fetchCutiPending();
+    await fetchPegawai();
+
+    // setInterval(async () => {
+    //     await fetchAbsensiToday();
+    //     await fetchCutiPending();
+    //     await fetchPegawai();
+    // }, 5000);
 
     try {
         const token = localStorage.getItem('token');
@@ -74,12 +81,25 @@ onMounted(async () => {
                 .map(a => a.id_pengguna);
 
 
-            pegawaiList.value = response.data.data.map(p => ({
+        pegawaiList.value = response.data.data.map(p => {
+            const absensi = absensiToday.value.find(a => a.id_pengguna === p.id);
+            let status = 'Tidak Hadir';
+
+            if (absensi) {
+                if (absensi.jam_masuk && absensi.jam_keluar) {
+                    status = 'Hadir';
+                } else if (absensi.jam_masuk && !absensi.jam_keluar) {
+                    status = 'Kerja';
+                }
+            }
+
+            return {
                 id: p.id,
                 nama: p.nama,
                 gerai: p.gerai?.gerai || 'Tidak diketahui',
-                status: todayIds.includes(p.id) ? 'Hadir' : 'Tidak Hadir'
-            }));
+                status
+            };
+        });
 
         totalPegawai.value = pegawaiList.value.length;
 
@@ -87,6 +107,46 @@ onMounted(async () => {
         console.error('Gagal mengambil data:', error);
     }
 });
+
+const fetchPegawai = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('/api/pegawai', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const todayIds = absensiToday.value
+            .filter(a => a.jam_masuk !== null)
+            .map(a => a.id_pengguna);
+
+        pegawaiList.value = response.data.data.map(p => {
+            const absensi = absensiToday.value.find(a => a.id_pengguna === p.id);
+            let status = 'Tidak Hadir';
+
+            if (absensi) {
+                if (absensi.jam_masuk && absensi.jam_keluar) {
+                    status = 'Hadir';
+                } else if (absensi.jam_masuk && !absensi.jam_keluar) {
+                    status = 'Kerja';
+                }
+            }
+
+            return {
+                id: p.id,
+                nama: p.nama,
+                gerai: p.gerai?.gerai || 'Tidak diketahui',
+                status
+            };
+        });
+
+        totalPegawai.value = pegawaiList.value.length;
+
+    } catch (error) {
+        console.error('Gagal mengambil data:', error);
+    }
+};
 
 const fetchAbsensiToday = async () => {
   try {
@@ -200,8 +260,7 @@ const fetchCutiPending = async () => {
                                 <td class="px-6 py-4">
                                     <span 
                                     class="inline-block px-3 py-1 text-xs rounded-full font-medium"
-                                    :class="pegawai.status === 'Hadir' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
-                                    >
+                                    :class="{'bg-green-100 text-green-700': pegawai.status === 'Hadir','bg-yellow-100 text-yellow-700': pegawai.status === 'Kerja','bg-red-100 text-red-700': pegawai.status === 'Tidak Hadir'}">
                                     {{ pegawai.status }}
                                     </span>
                                 </td>
@@ -244,15 +303,10 @@ const fetchCutiPending = async () => {
                             index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50', 
                             'px-6 py-2.5 border-b hover:bg-gray-200 transition cursor-pointer'
                         ]">
-                        <div class="flex items-center space-x-4"> <!-- Flex container for name, date, status, and profile image -->
-                            <!-- Nomor Urut -->
-                            <div class="text-gray-600 font-medium">{{ (cutiCurrentPage - 1) * cutiItemsPerPage + index + 1 }}</div> <!-- Menampilkan nomor urut -->
-
-                            <!-- Profile Image -->
-                            <img :src="cuti?.pengguna?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + cuti.pengguna.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
-                            
-                            <!-- Information -->
-                            <div class="flex-1"> <!-- Take remaining space -->
+                        <div class="flex items-center space-x-4">
+                            <div class="text-gray-600 font-medium">{{ (cutiCurrentPage - 1) * cutiItemsPerPage + index + 1 }}</div>
+                            <img :src="cuti?.pengguna?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + cuti.pengguna.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
+                            <div class="flex-1">
                                 <div class="text-lg font-semibold text-gray-800">{{ cuti.pengguna.nama }}</div>
                                 <div class="text-sm text-gray-600">
                                     Mengajukan cuti pada 
@@ -264,7 +318,6 @@ const fetchCutiPending = async () => {
                             </div>
                         </div>
                     </div>
-                    <!-- Pagination -->
                     <div v-if="cutiPending.length > cutiItemsPerPage" class="flex justify-between items-center px-6 py-5 bg-white border-t rounded-b-lg">
                         <div class="text-sm text-gray-600">
                             Data {{ (cutiCurrentPage - 1) * cutiItemsPerPage + 1 }} - 

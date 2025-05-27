@@ -72,7 +72,7 @@
         <!-- Profile Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-4">
           <div class="flex items-center space-x-4">
-            <img :src="pegawai?.gambar_profil ? 'http://192.168.63.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
+            <img :src="pegawai?.gambar_profil ? 'http://192.168.195.63:8000/storage/' + pegawai.gambar_profil : 'https://via.placeholder.com/80'" alt="Profile" class="w-16 h-16 rounded-full object-cover" />
             <div>
               <h2 class="text-xl font-semibold">{{ pegawai?.nama }}</h2>
               <p class="text-gray-500 text-sm">{{ pegawai?.email }}</p>

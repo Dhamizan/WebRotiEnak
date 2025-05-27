@@ -107,8 +107,8 @@ export default {
       class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center"
     >
       <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-sm space-y-4 text-center">
-        <h3 class="text-lg font-semibold" :class="isError ? 'text-green-600' : 'text-red-600'">
-          {{ isError ? 'Berhasil' : 'Gagal' }}
+        <h3 class="text-lg font-semibold" :class="isError ? 'text-red-600' : 'text-green-600'">
+          {{ isError ? 'Gagal' : 'Berhasil' }}
         </h3>
         <p class="text-gray-700">{{ message }}</p>
         <button
